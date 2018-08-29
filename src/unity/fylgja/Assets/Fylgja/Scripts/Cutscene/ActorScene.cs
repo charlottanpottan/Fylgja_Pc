@@ -12,12 +12,15 @@ public class ActorScene : LogicCamera, ActorSceneComponentNotification
 	public bool skippable = true;
 
 	public delegate void ActiveLineNotification(ActorScene scene, ActorSceneComponent component);
+
 	public ActiveLineNotification activeLineNotification;
 
 	public delegate void EndOfSceneNotification(ActorScene scene);
+
 	public EndOfSceneNotification endOfSceneNotification;
 
 	public delegate void SceneAbortedNotification(ActorScene scene);
+
 	public SceneAbortedNotification sceneAbortedNotification;
 
 	int lineIndex;
@@ -26,6 +29,7 @@ public class ActorScene : LogicCamera, ActorSceneComponentNotification
 	ActorSceneComponent activeLine;
 
 	public delegate void SceneEnd();
+
 	public SceneEnd endFunction;
 
 	float deliverNextLineAtTime;
@@ -35,7 +39,7 @@ public class ActorScene : LogicCamera, ActorSceneComponentNotification
 
 	bool isActingScene;
 	bool isEndOfScene;
-	
+
 	AllowedToMoveModifier dontMoveModifier;
 	AllowedToInteractModifier dontInteractModifier;
 	AvatarToPlayerNotifications playerNotifications;
@@ -87,10 +91,11 @@ public class ActorScene : LogicCamera, ActorSceneComponentNotification
 		playerNotifications.DetachListener(listenerHandle);
 		listenerHandle = null;
 	}
-	
+
 	public override void UpdateCamera(ref LogicCameraInfo cameraInfo)
 	{
 		var actorLine = activeLine as ActorLine;
+
 		if (actorLine != null)
 		{
 			actorLine.UpdateCamera(ref logicCameraInfo);
@@ -103,14 +108,14 @@ public class ActorScene : LogicCamera, ActorSceneComponentNotification
 
 		cameraInfo = logicCameraInfo;
 	}
-	
+
 	public override void SetCameraPivot(ref LogicCameraInfo cameraInfo, Vector2 targetPivot)
 	{
 	}
 
 	public void AddSceneObject(string name, GameObject o)
 	{
-		Debug.Log("ActorScene: Alias '" + name + "' is set to " + o.name + " (" + o.transform.root.name + ")" );
+		Debug.Log("ActorScene: Alias '" + name + "' is set to " + o.name + " (" + o.transform.root.name + ")");
 		DebugUtilities.Assert(!actorsInScene.ContainsKey(name), "We already have an actor named '" + name + "'");
 		actorsInScene.Add(name, o);
 	}
@@ -155,6 +160,7 @@ public class ActorScene : LogicCamera, ActorSceneComponentNotification
 		Debug.Log("PlayScene!" + name + " resuming:" + isResuming);
 		DebugUtilities.Assert(notifications != null, "Player notifications can not be null");
 		playerNotifications = notifications;
+
 		if (useFader)
 		{
 			fadeInOut.FadeOut(fadeOutTime);
@@ -180,12 +186,14 @@ public class ActorScene : LogicCamera, ActorSceneComponentNotification
 	void PostSceneFadeOutDone()
 	{
 		Debug.Log("Scene is completely done:" + name);
+
 		if (endFunction != null)
 		{
 			endFunction();
 		}
 
 		bool isARealScene = endOfSceneNotification != null;
+
 		if (endOfSceneNotification != null)
 		{
 			Debug.Log("End of scene notification for scene:" + name);
@@ -295,6 +303,7 @@ public class ActorScene : LogicCamera, ActorSceneComponentNotification
 	{
 		Debug.Log("Completed Scene!" + name);
 		fadeOutDoneAt = Time.time + fadeOutTime;
+
 		if (useFader)
 		{
 			fadeInOut.FadeOut(fadeOutTime);
@@ -341,12 +350,14 @@ public class ActorScene : LogicCamera, ActorSceneComponentNotification
 		foreach (var actorKeyValue in actorsInScene)
 		{
 			var actorObject = actorKeyValue.Value;
+
 			if (actorObject == null)
 			{
 				Debug.Log("Actor: " + actorKeyValue.Key + " disappeared!");
 				continue;
 			}
 			var sceneActor = actorObject.GetComponentInChildren<SceneActor>();
+
 			if (sceneActor != null)
 			{
 				if (sceneActor.IsInScene())
@@ -418,6 +429,7 @@ public class ActorScene : LogicCamera, ActorSceneComponentNotification
 		activeLine = lines[lineIndex];
 
 		var actorLine = activeLine as ActorLine;
+
 		if (actorLine != null && actorLine.shotComposition != ShotComposition.UsePrevious && selectedCameraHandle == null)
 		{
 			AttachCameraAndListener();
@@ -462,8 +474,6 @@ public class ActorScene : LogicCamera, ActorSceneComponentNotification
 		activeLine.Skip();
 	}
 
-
-
 	public void QuitScene()
 	{
 		if (sceneAbortedNotification != null)
@@ -472,7 +482,6 @@ public class ActorScene : LogicCamera, ActorSceneComponentNotification
 		}
 		CloseScene();
 	}
-
 
 	void OnComponentDone(ActorSceneComponent component)
 	{
@@ -514,6 +523,7 @@ public class ActorScene : LogicCamera, ActorSceneComponentNotification
 		foreach (var instantiatedActorObject in instantiatedActors)
 		{
 			var foundActorName = instantiatedActorObject.name;
+
 			if (foundActorName == "Tyra(Clone)")
 			{
 				foundActorName = "Tyra";
@@ -531,6 +541,7 @@ public class ActorScene : LogicCamera, ActorSceneComponentNotification
 		{
 			var actorObject = GetActor(actor.name);
 			var sceneActor = actor.GetComponentInChildren<SceneActor>();
+
 			if (sceneActor)
 			{
 				sceneActor.ActorSceneEnter();
@@ -549,7 +560,6 @@ public class ActorScene : LogicCamera, ActorSceneComponentNotification
 			instantiatedActor.transform.rotation = actorPosition.transform.rotation;
 		}
 	}
-
 
 	public Transform GetCameraTransform()
 	{

@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections;
 using System;
 
-
 [System.Serializable]
 public class FlightRoute
 {
@@ -37,12 +36,12 @@ public class FlightPath : MonoBehaviour
 	public AnimationClip waitAnim;
 	[HideInInspector]
 	public int targetIndex;
-	
+
 	void Awake()
 	{
-		Initialize();	
+		Initialize();
 	}
-	
+
 	public void Initialize()
 	{
 		foreach (FlightRoute route in routes)
@@ -68,6 +67,7 @@ public class FlightPath : MonoBehaviour
 			currentIndex--;
 			return;
 		}
+
 		if (targetIndex > currentIndex)
 		{
 			GetComponent<Animation>().CrossFade(moveAnim.name);
@@ -75,6 +75,7 @@ public class FlightPath : MonoBehaviour
 			currentIndex++;
 			return;
 		}
+
 		if (targetIndex == currentIndex)
 		{
 			GetComponent<Animation>().CrossFade(waitAnim.name);

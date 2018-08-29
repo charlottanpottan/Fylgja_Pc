@@ -10,4 +10,3 @@ public class OpenStashAction : ActionArbitration
 	public AnimationClip closeAnimation;
 	public Animation stashAnimationComponent;
 }
-

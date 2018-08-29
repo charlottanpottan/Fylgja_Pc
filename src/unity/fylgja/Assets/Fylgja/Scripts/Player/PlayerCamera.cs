@@ -16,6 +16,7 @@ public class PlayerCamera : LogicCamera
 	public override void UpdateCamera(ref LogicCameraInfo cameraInfo)
 	{
 		DebugUtilities.Assert(logicCamera != null, "LogicCamera can not be null for player camera");
+
 		if (Time.deltaTime < 0.000001)
 		{
 			return;
@@ -23,17 +24,17 @@ public class PlayerCamera : LogicCamera
 
 		logicCamera.UpdateCamera(ref cameraInfo);
 /*
-		var headOffset = new Vector3();
-		const float headRadius = 2.0f;
-		const float headHeight = 0.8f;
-		if (cameraInfo.pivotDistance < headRadius)
-		{
-			headOffset.y = ((headRadius - cameraInfo.pivotDistance) / headRadius) * headHeight;
-		}
-		
-*/		
+                var headOffset = new Vector3();
+                const float headRadius = 2.0f;
+                const float headHeight = 0.8f;
+                if (cameraInfo.pivotDistance < headRadius)
+                {
+                        headOffset.y = ((headRadius - cameraInfo.pivotDistance) / headRadius) * headHeight;
+                }
+
+*/
 	}
-	
+
 	public override void SetCameraPivot(ref LogicCameraInfo cameraInfo, Vector2 targetPivot)
 	{
 		logicCamera.SetCameraPivot(ref cameraInfo, targetPivot);

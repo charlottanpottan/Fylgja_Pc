@@ -53,12 +53,12 @@ public class VolumeBuoyancy : MonoBehaviour
 	Vector3 UpdateWaveMotion(Vector3 buoyancyPos, FloatableWater waterSurface)
 	{
 		buoyancyPos.x += waterSurface.waveXMotion1 * Mathf.Sin(waterSurface.waveFreq1 * Time.time)
-				 + waterSurface.waveXMotion2 * Mathf.Sin(waterSurface.waveFreq2 * Time.time)
-				 + waterSurface.waveXMotion3 * Mathf.Sin(waterSurface.waveFreq3 * Time.time);
+		                 + waterSurface.waveXMotion2 * Mathf.Sin(waterSurface.waveFreq2 * Time.time)
+		                 + waterSurface.waveXMotion3 * Mathf.Sin(waterSurface.waveFreq3 * Time.time);
 
 		buoyancyPos.z += waterSurface.waveYMotion1 * Mathf.Sin(waterSurface.waveFreq1 * Time.time)
-				 + waterSurface.waveYMotion2 * Mathf.Sin(waterSurface.waveFreq2 * Time.time)
-				 + waterSurface.waveYMotion3 * Mathf.Sin(waterSurface.waveFreq3 * Time.time);
+		                 + waterSurface.waveYMotion2 * Mathf.Sin(waterSurface.waveFreq2 * Time.time)
+		                 + waterSurface.waveYMotion3 * Mathf.Sin(waterSurface.waveFreq3 * Time.time);
 
 		return buoyancyPos;
 	}

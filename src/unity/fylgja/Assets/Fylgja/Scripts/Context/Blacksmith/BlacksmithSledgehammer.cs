@@ -20,6 +20,7 @@ public class BlacksmithSledgehammer : MonoBehaviour
 	void OnTriggerEnter(Collider collider)
 	{
 		var sword = collider.transform.root.GetComponentInChildren<BlacksmithSword>();
+
 		if (sword == null)
 		{
 			// Debug.LogWarning("Got collision with something else other than a BlacksmithSword:" + collider.name);
@@ -34,4 +35,3 @@ public class BlacksmithSledgehammer : MonoBehaviour
 		}
 	}
 }
-

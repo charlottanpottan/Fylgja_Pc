@@ -27,6 +27,7 @@ public class ActorCompleteScenes : ActorSceneComponent
 		{
 			Debug.Log("ActorCompleteScenes:Instantiating:" + scenePrefab.name);
 			ActorScene instantiatedScene;
+
 			if (!actingInScene.IsResuming())
 			{
 				instantiatedScene = avatarQuest.CreateQuest(scenePrefab);
@@ -34,6 +35,7 @@ public class ActorCompleteScenes : ActorSceneComponent
 			else
 			{
 				instantiatedScene = avatarQuest.FetchQuest(scenePrefab.name);
+
 				if (instantiatedScene == null)
 				{
 					continue;
@@ -47,8 +49,6 @@ public class ActorCompleteScenes : ActorSceneComponent
 	public override void Skip()
 	{
 	}
-
-
 
 	void OnEndOfScene(ActorScene sceneThatEnded)
 	{

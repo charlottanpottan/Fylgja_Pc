@@ -29,4 +29,3 @@ public class ActorAddQuestItemToInventory : ActorSceneComponent
 		Close();
 	}
 }
-

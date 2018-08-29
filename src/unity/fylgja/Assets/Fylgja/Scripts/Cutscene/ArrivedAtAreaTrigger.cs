@@ -11,6 +11,7 @@ public class ArrivedAtAreaTrigger : MonoBehaviour
 		DebugUtilities.Assert(avatar != null, "This trigger should only happen for Avatars:" + name);
 
 		var avatarQuest = avatar.GetComponentInChildren<AvatarQuest>();
+
 		if (avatarQuest == null)
 		{
 			return;
@@ -19,4 +20,3 @@ public class ArrivedAtAreaTrigger : MonoBehaviour
 		avatarQuest.OnTriggeredArea(areaName);
 	}
 }
-

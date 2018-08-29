@@ -7,11 +7,11 @@ public class LoadChapterAction : ActionArbitration
 	public PlayerLevelLoader playerLoader;
 
 	public int targetCheckpoint;
-	
+
 	public AudioClip clickAudio;
 	public AudioHandler audioHandler;
 	public float audioVolume = 0.2f;
-	
+
 	public string[] completedQuestIds;
 	public string[] currentQuestIds;
 	public string[] currentQuestParts;
@@ -19,7 +19,7 @@ public class LoadChapterAction : ActionArbitration
 
 	public override void ExecuteAction(IAvatar avatar)
 	{
-		if(clickAudio != null)
+		if (clickAudio != null)
 		{
 			DontDestroyOnLoad(audioHandler.CreateAndPlay(clickAudio, audioVolume));
 		}
@@ -27,13 +27,13 @@ public class LoadChapterAction : ActionArbitration
 		{
 			DontDestroyOnLoad(audioHandler.CreateAndPlay(audioVolume));
 		}
-		
+
 		playerLoader.playerStorage.data.completedQuestIds = new List<string>(completedQuestIds);
-		
+
 		playerLoader.playerStorage.data.inventoryQuestItemIds = new List<string>(inventoryItems);
 
 		playerLoader.playerStorage.data.startedQuests = new List<PlayerStorageDataStartedQuest>();
-		
+
 //		foreach (var currentQuestId in currentQuestIds)
 //		{
 //			var startedQuest = new PlayerStorageDataStartedQuest();
@@ -41,22 +41,23 @@ public class LoadChapterAction : ActionArbitration
 //			startedQuest.questPart = "";
 //			playerLoader.playerStorage.data.startedQuests.Add(startedQuest);
 //		}
-		
-		for(int i = 0; i < currentQuestIds.Length; i++)
+
+		for (int i = 0; i < currentQuestIds.Length; i++)
 		{
 			var startedQuest = new PlayerStorageDataStartedQuest();
 			startedQuest.questId = currentQuestIds[i];
-			if(currentQuestParts.Length > i && currentQuestParts[i] != null)
+
+			if (currentQuestParts.Length > i && currentQuestParts[i] != null)
 			{
 				startedQuest.questPart = currentQuestParts[i];
 			}
 			else
 			{
-				startedQuest.questPart = "";	
+				startedQuest.questPart = "";
 			}
 			playerLoader.playerStorage.data.startedQuests.Add(startedQuest);
 		}
-		
+
 		playerLoader.ContinueFromCheckpoint(new CheckpointId(targetCheckpoint));
 	}
 }

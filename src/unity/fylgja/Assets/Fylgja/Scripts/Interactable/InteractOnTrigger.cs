@@ -5,7 +5,7 @@ public class InteractOnTrigger : MonoBehaviour
 {
 	public Interactable interactable;
 	private bool canInteract = true;
-	
+
 	public IEnumerator Pause(float pauseTime)
 	{
 		canInteract = false;
@@ -15,7 +15,7 @@ public class InteractOnTrigger : MonoBehaviour
 
 	void OnTriggerEnter(Collider collider)
 	{
-		if(canInteract)
+		if (canInteract)
 		{
 			Debug.Log("Collision:" + name);
 			var avatar = collider.GetComponentInChildren<CharacterAvatar>();

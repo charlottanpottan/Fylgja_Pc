@@ -24,7 +24,6 @@ public class PlayerStorage : MonoBehaviour
 		}
 	}
 
-
 	void ClearStorageData()
 	{
 		data.startingCheckpointId = new CheckpointId(0);
@@ -53,6 +52,7 @@ public class PlayerStorage : MonoBehaviour
 
 		var serializer = new XmlSerializer(typeof(PlayerStorageData));
 		StringWriter stringWriter = new StringWriter();
+
 		serializer.Serialize(stringWriter, data);
 		stringWriter.Close();
 
@@ -64,6 +64,7 @@ public class PlayerStorage : MonoBehaviour
 	void Load()
 	{
 		var stateString = PlayerPrefs.GetString(PlayerPrefsStateName);
+
 		Debug.Log("Load:" + stateString);
 
 		var serializer = new XmlSerializer(typeof(PlayerStorageData));
@@ -114,11 +115,11 @@ public class PlayerStorage : MonoBehaviour
 		Debug.Log("**************************");
 	}
 
-
 	public bool SetStartCheckpoint(CheckpointId id)
 	{
 		data.startingCheckpointId = id;
 		bool visitedBefore = HasVisitedCheckpoint(id);
+
 		if (!visitedBefore)
 		{
 			data.checkpointsPassed.Add(id.CheckpointIdValue());
@@ -164,6 +165,7 @@ public class PlayerStorage : MonoBehaviour
 	public void AddStartedQuest(string questName)
 	{
 		Debug.Log("ADDING QUEST:" + questName);
+
 		if (HasStartedQuest(questName))
 		{
 			return;
@@ -195,7 +197,6 @@ public class PlayerStorage : MonoBehaviour
 		Save();
 	}
 
-
 	public void AddInventoryQuestItem(string name)
 	{
 		data.inventoryQuestItemIds.Add(name);
@@ -211,6 +212,7 @@ public class PlayerStorage : MonoBehaviour
 	public void CompletedQuest(string questId)
 	{
 		DebugUtilities.Assert(questId.Trim().Length != 0, "QuestId is empty!");
+
 		if (data.completedQuestIds.Contains(questId))
 		{
 			Debug.LogWarning("You are trying to add a completed quest to a profile that already has done it. Strange");

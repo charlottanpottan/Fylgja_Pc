@@ -16,19 +16,22 @@ public class AudioPlayer : AudioHandler
 		if (minTimeInterval == 0 && maxTimeInterval == 0)
 		{
 			hasInterval = false;
-			if(playAutomatically)
+
+			if (playAutomatically)
 			{
 				TriggerSound();
+
 				if (destroyAfterPlaying)
 				{
 					StartCoroutine("PlayThenDestroy");
 				}
 			}
 		}
-		else{
-			if(playAutomatically)
+		else
+		{
+			if (playAutomatically)
 			{
-				StartCoroutine("PlayInterval");	
+				StartCoroutine("PlayInterval");
 			}
 		}
 	}
@@ -39,11 +42,13 @@ public class AudioPlayer : AudioHandler
 		if (!GetComponent<AudioSource>().isPlaying && !hasInterval)
 		{
 			TriggerSound();
+
 			if (destroyAfterPlaying)
 			{
 				StartCoroutine("PlayThenDestroy");
 			}
 		}
+
 		if (hasInterval)
 		{
 			StartCoroutine("PlayInterval");
@@ -72,7 +77,7 @@ public class AudioPlayer : AudioHandler
 
 	void OnTriggerExit(Collider c)
 	{
-		// 	Debug.Log(gameObject.name + " stopped playing by " + c.name);
+		//      Debug.Log(gameObject.name + " stopped playing by " + c.name);
 		if (!destroyAfterPlaying && GetComponent<AudioSource>().isPlaying)
 		{
 			GetComponent<AudioSource>().Stop();

@@ -16,7 +16,7 @@ public class PivotCamera : LogicCamera
 	float rotateY;
 	float cameraDistance = 2.0f;
 	float targetCameraDistance = 2.0f;
-	
+
 	public override void SetCameraPivot(ref LogicCameraInfo cameraInfo, Vector2 targetPivot)
 	{
 		cameraInfo.pivotRotationX = targetPivot.x;

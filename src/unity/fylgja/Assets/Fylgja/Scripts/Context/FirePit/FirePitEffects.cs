@@ -91,10 +91,11 @@ public class FirePitEffects : MonoBehaviour
 		Debug.Log("Effect: lost full flame");
 		TriggerEffect(lostFullFlame);
 	}
-	
+
 	void ResetEffects()
 	{
 		AnimationState state = GetComponent<Animation>()[fire.name];
+
 		state.normalizedTime = 0;
 		GetComponent<AudioSource>().Stop();
 	}

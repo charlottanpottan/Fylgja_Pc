@@ -110,6 +110,7 @@ public class PolygonBuoyancy : MonoBehaviour
 		for (int i = 0; i < vertCount; ++i)
 		{
 			vertexWaterDistances[i] = transform.TransformPoint(vertices[i]).y - FloatableWaterPlane.instance.transform.position.y;
+
 			if (vertexWaterDistances[i] < TINY_DEPTH)
 			{
 				++numberOfVerticesSubmerged;

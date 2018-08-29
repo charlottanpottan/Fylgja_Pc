@@ -53,7 +53,6 @@ public class PlayerInteraction : MonoBehaviour
 		LogicCamera camera;
 		string cameraName;
 
-
 		public CameraItem(LogicCamera cameraToSwitchTo, string _cameraName)
 		{
 			cameraName = _cameraName;
@@ -68,7 +67,7 @@ public class PlayerInteraction : MonoBehaviour
 				return camera;
 			}
 		}
-		
+
 		public string CameraName
 		{
 			get
@@ -81,19 +80,18 @@ public class PlayerInteraction : MonoBehaviour
 	List<ListenerStackItem> listenerStack = new List<ListenerStackItem>();
 
 	List<CameraItem> cameraStack = new List<CameraItem>();
-	
-
 
 	void Start()
 	{
 		player.playerInteraction = this;
+
 		if (ingameCameraToSpawn != null)
 		{
 			SetupListener();
 			SetupIngameCamera();
 		}
 	}
-	
+
 	public bool AllowedToUseUI
 	{
 		get
@@ -117,13 +115,12 @@ public class PlayerInteraction : MonoBehaviour
 		AttachListenerToHighestPriority();
 
 		return listenerHandle;
-
 	}
 
 	void AttachListenerToHighestPriority()
 	{
 		DebugUtilities.Assert(listenerStack.Count >= 1, "Must have at least one listener active");
-		var listenerHandle = listenerStack[listenerStack.Count-1];
+		var listenerHandle = listenerStack[listenerStack.Count - 1];
 
 		if (listener.transform.parent != listenerHandle.TargetTransform)
 		{
@@ -133,7 +130,7 @@ public class PlayerInteraction : MonoBehaviour
 			listener.transform.localRotation = new Quaternion();
 			listener.gameObject.SetActiveRecursively(true);
 		}
-		Debug.Log("Listener is on object name:" +  listenerHandle.TargetTransform.name);
+		Debug.Log("Listener is on object name:" + listenerHandle.TargetTransform.name);
 	}
 
 	public void DetachListener(ListenerStackItem item)
@@ -169,6 +166,7 @@ public class PlayerInteraction : MonoBehaviour
 		var cameraHandle = cameraStack[cameraStack.Count - 1];
 
 		Debug.Log("Active Camera " + cameraHandle.CameraName + " target:" + cameraHandle.TargetCamera.name);
+
 		if (cameraApplicator.CurrentCamera != cameraHandle.TargetCamera)
 		{
 			DebugUtilities.Assert(cameraHandle.TargetCamera != null, "The target camera is null, how is that possible?");
@@ -188,12 +186,11 @@ public class PlayerInteraction : MonoBehaviour
 		listener.enabled = false;
 	}
 
-	
 	public void OnSubtitleStart(string text)
 	{
 		subtitles.OnSubtitleStart(text);
 	}
-	
+
 	public void OnSubtitleStop()
 	{
 		subtitles.OnSubtitleStop();
@@ -215,10 +212,11 @@ public class PlayerInteraction : MonoBehaviour
 		listener = (Instantiate(listenerToSpawn) as GameObject).GetComponent<AudioListener>();
 		DebugUtilities.Assert(listener != null, " ListenerGameObject is null, bad spawn");
 	}
-	
+
 	void SetupIngameCamera()
 	{
 		var defaultCameraToSpawnObject = Instantiate(ingameCameraToSpawn) as GameObject;
+
 		cameraApplicator = defaultCameraToSpawnObject.GetComponent<LogicCameraInfoApplicator>();
 		DebugUtilities.Assert(cameraApplicator != null, "Must have PlayerCamera component on this camera");
 	}
@@ -227,7 +225,7 @@ public class PlayerInteraction : MonoBehaviour
 	{
 		var gameplayCameraToSpawnObject = Instantiate(gameplayCameraToSpawn) as GameObject;
 
-		foreach(GameObject go in GameObject.FindGameObjectsWithTag("IndoorsTrigger"))
+		foreach (GameObject go in GameObject.FindGameObjectsWithTag("IndoorsTrigger"))
 		{
 			go.GetComponent<PlayerIndoorsTrigger>().targetCamera = cameraApplicator;
 		}
@@ -245,10 +243,10 @@ public class PlayerInteraction : MonoBehaviour
 		return cameraApplicator.GetComponent<Camera>();
 	}
 
-
 	public void OnAssignedVehicle(Vehicle vehicle)
 	{
 		Debug.Log("Received a new vehicle:" + vehicle.name);
+
 		if (hud == null)
 		{
 			var hudObject = Instantiate(hudPrefab) as GameObject;
@@ -293,12 +291,12 @@ public class PlayerInteraction : MonoBehaviour
 		return isClose;
 	}
 
-
 	public bool CanInteractWith(Interactable interactable)
 	{
 		if (!interactable.canInteractFromAnyDistance)
 		{
 			bool isClose = InteractableIsWithinWalkingDistance(interactable);
+
 			if (!isClose)
 			{
 				Debug.Log("Interactable is not close");
@@ -313,6 +311,7 @@ public class PlayerInteraction : MonoBehaviour
 	{
 		Debug.Log("Clicked Interactable:" + interactable.name);
 		var avatar = player.AssignedAvatar();
+
 		if (interactable.canInteractFromAnyDistance || avatar == null)
 		{
 			var action = interactable.GetComponentInChildren<ActionArbitration>();
@@ -372,6 +371,7 @@ public class PlayerInteraction : MonoBehaviour
 				highlightedInteractable = null;
 			}
 		}
+
 		if (interactable != null && highlightedInteractable == null)
 		{
 			if (CanInteractWith(interactable))
@@ -429,6 +429,7 @@ public class PlayerInteraction : MonoBehaviour
 		var avatar = player.AssignedAvatar();
 		var directionToAvatar = (avatar.transform.position - hitPoint).normalized;
 		var radius = 0.05f;
+
 		walkPosition = hitPoint + directionToAvatar * radius;
 		walkRotation = Quaternion.LookRotation(-directionToAvatar);
 	}
@@ -436,6 +437,7 @@ public class PlayerInteraction : MonoBehaviour
 	void ClickedOnObject(RaycastHit hit)
 	{
 		var avatar = player.AssignedAvatar();
+
 		if (!avatar)
 		{
 			return;
@@ -451,11 +453,12 @@ public class PlayerInteraction : MonoBehaviour
 	void MoveVehicleToTarget(Vector3 targetPosition, Quaternion targetRotation)
 	{
 		var avatar = player.AssignedAvatar();
+
 		if (!avatar)
 		{
 			return;
 		}
-		
+
 		var vehicle = avatar.ControlledVehicle();
 //		ShowClickEffect(targetPosition, targetRotation);
 		var moveToPoint = vehicle.GetComponentInChildren<VehicleMoveToPoint>();
@@ -466,7 +469,6 @@ public class PlayerInteraction : MonoBehaviour
 	{
 		RaycastHit hit = new RaycastHit();
 		var mouseOverInteractable = CheckInteractableFromMousePosition(out hit);
-
 
 		bool interactUp = Input.GetButtonUp("interact");
 		bool interactDown = Input.GetButtonDown("interact");
@@ -482,13 +484,14 @@ public class PlayerInteraction : MonoBehaviour
 		}
 
 		var clickedOnObject = hit.collider.gameObject;
+
 		if (clickedOnObject == null)
 		{
 			return;
 		}
 		var clickedOnLayer = clickedOnObject.layer;
 		bool foundGround = clickedOnLayer == Layers.Ground || clickedOnLayer == Layers.Water;
-		
+
 		if ((mouseOverInteractable != null && mouseOverInteractable.canInteractFromAnyDistance && !foundGround && allowedToUseUI) || (avatarInteractionEnabled))
 		{
 		}
@@ -497,7 +500,7 @@ public class PlayerInteraction : MonoBehaviour
 			mouseOverInteractable = null;
 			foundGround = false;
 		}
-		
+
 		if (foundGround && avatarMoveEnabled)
 		{
 			if (interactDown)
@@ -514,7 +517,7 @@ public class PlayerInteraction : MonoBehaviour
 		}
 		else if ((interactUp || interactDown) && (highlightedInteractable != null))
 		{
-			if ( (interactDown && highlightedInteractable.TrigActionOnDown()) || (interactUp && !highlightedInteractable.TrigActionOnDown()))
+			if ((interactDown && highlightedInteractable.TrigActionOnDown()) || (interactUp && !highlightedInteractable.TrigActionOnDown()))
 			{
 				InteractableClick(highlightedInteractable, hit.point);
 			}
@@ -528,6 +531,7 @@ public class PlayerInteraction : MonoBehaviour
 			return;
 		}
 		Vehicle vehicle = player.AssignedAvatar().ControlledVehicle();
+
 		if (!vehicle)
 		{
 			return;
@@ -535,15 +539,14 @@ public class PlayerInteraction : MonoBehaviour
 		vehicleInput.SetVehicle(vehicle);
 		vehicleInput.OnInput();
 	}
-	
 
 	void Update()
 	{
-		if(subtitles != null)
+		if (subtitles != null)
 		{
 			subtitles.ShouldBeVisible = player.playerStorage.playerData().subtitlesEnabled;
 		}
-		
+
 		if (countDownToInteract > 0)
 		{
 			countDownToInteract--;
@@ -586,7 +589,6 @@ public class PlayerInteraction : MonoBehaviour
 		CloseMinigame();
 	}
 
-
 	void CloseMinigame()
 	{
 		Debug.Log("Playerinteraction noticed that minigame has ended");
@@ -598,22 +600,24 @@ public class PlayerInteraction : MonoBehaviour
 	{
 		avatarMoveEnabled = move;
 	}
-	
+
 	public void OnAllowedToUseUI(bool allowed)
 	{
 		allowedToUseUI = allowed;
 		UpdateInteraction();
 	}
-	
+
 	void UpdateInteraction()
 	{
 		var showCursor = allowedToUseUI || avatarInteractionEnabled;
+
 		Cursor.visible = showCursor;
 	}
 
 	public void OnAllowedToInteract(bool move)
 	{
 		avatarInteractionEnabled = move;
+
 		if (move)
 		{
 			countDownToInteract = 10;

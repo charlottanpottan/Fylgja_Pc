@@ -23,7 +23,6 @@ public class ActorExitVehicle : ActorSceneComponent
 		avatar.transform.root.BroadcastMessage("OnLeaveVehicle");
 		avatar.AssignVehicle(avatar.transform.root.GetComponentInChildren<CharacterWalking>());
 
-
 		avatar.AssignVehicle(avatarAsVehicle);
 
 		ComponentDone();

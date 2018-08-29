@@ -10,6 +10,7 @@ public class ActorStartQuest : ActorSceneComponent
 	{
 		var avatarObject = actingInScene.GetActor(actorName);
 		var avatarQuest = avatarObject.GetComponentInChildren<AvatarQuest>();
+
 		avatarQuest.CreateQuest(quest);
 		ComponentDone();
 	}

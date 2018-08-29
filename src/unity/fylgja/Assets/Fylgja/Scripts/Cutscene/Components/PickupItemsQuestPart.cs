@@ -28,6 +28,7 @@ public class PickupItemsQuestPart : ActorSceneComponent
 	protected override void Act()
 	{
 		var avatar = actingInScene.GetActor("Tyra");
+
 		avatarQuest = avatar.GetComponentInChildren<AvatarQuest>();
 		foreach (var questItem in itemsToPickup)
 		{
@@ -57,4 +58,3 @@ public class PickupItemsQuestPart : ActorSceneComponent
 		}
 	}
 }
-

@@ -28,6 +28,7 @@ public class VehicleMoveToPoint : MonoBehaviour
 		{
 			return;
 		}
+
 		if (!hasReachedPosition && HasReachedPosition())
 		{
 			hasReachedPosition = true;
@@ -70,7 +71,6 @@ public class VehicleMoveToPoint : MonoBehaviour
 		}
 	}
 
-
 	bool HasReachedPosition()
 	{
 		float distance = DistanceDisregardingHeight();
@@ -81,27 +81,28 @@ public class VehicleMoveToPoint : MonoBehaviour
 	bool IsRotatedToTarget(Quaternion desiredRotation)
 	{
 		var rotationDiff = Mathf.Abs(Angle.AngleDiff(desiredRotation.eulerAngles.y, vehicle.transform.rotation.eulerAngles.y));
+
 		return rotationDiff < 15f;
 	}
 
 	/*
-			Debug.Log("VehicleMoveToPoint: New Target position:" + target + " for vehicle:" + vehicle.name);
-		targetPosition = target;
-		var delta = targetPosition - vehicle.transform.position;
-		if (delta.magnitude > 0.001f)
-		{
-			delta.y = 0;
-			delta.Normalize();
-			targetRotation = Quaternion.LookRotation(delta);
-		}
-		if (IsRotatedToTarget(targetRotation) && HasReachedPosition())
-		{
-			Debug.Log("We are already in position and rotation, so we stay here");
-			return;
-		}
-		isMovingToTarget = true;
-		hasReachedPosition = false;
-*/
+	                Debug.Log("VehicleMoveToPoint: New Target position:" + target + " for vehicle:" + vehicle.name);
+	        targetPosition = target;
+	        var delta = targetPosition - vehicle.transform.position;
+	        if (delta.magnitude > 0.001f)
+	        {
+	                delta.y = 0;
+	                delta.Normalize();
+	                targetRotation = Quaternion.LookRotation(delta);
+	        }
+	        if (IsRotatedToTarget(targetRotation) && HasReachedPosition())
+	        {
+	                Debug.Log("We are already in position and rotation, so we stay here");
+	                return;
+	        }
+	        isMovingToTarget = true;
+	        hasReachedPosition = false;
+	*/
 	public void MoveToTarget(Vector3 targetFirstPosition, Quaternion targetFirstRotation)
 	{
 		SendMessage("OnVehicleWantsToMove", SendMessageOptions.DontRequireReceiver);
@@ -111,9 +112,11 @@ public class VehicleMoveToPoint : MonoBehaviour
 		if (!IsRotatedToTarget(targetRotation))
 		{
 		}
+
 		if (!HasReachedPosition())
 		{
 		}
+
 		if (IsRotatedToTarget(targetRotation) && HasReachedPosition())
 		{
 			return;

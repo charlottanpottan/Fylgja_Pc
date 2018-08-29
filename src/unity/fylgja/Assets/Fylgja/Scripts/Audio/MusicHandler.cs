@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 
-
 public class MusicHandler : MonoBehaviour
 {
 	public AudioSource targetAudioSource;
@@ -33,15 +32,14 @@ public class MusicHandler : MonoBehaviour
 	public float playAudioVolume;
 	public float playAudioFadeFromVolume;
 	public float playAudioFadeTime;
-	
+
 	void Awake()
 	{
-		if(targetAudioSource == null)
+		if (targetAudioSource == null)
 		{
-			targetAudioSource = GameObject.Find(targetByName).GetComponent<AudioSource>();	
+			targetAudioSource = GameObject.Find(targetByName).GetComponent<AudioSource>();
 		}
 	}
-
 
 	IEnumerator DoChanges()
 	{
@@ -50,6 +48,7 @@ public class MusicHandler : MonoBehaviour
 			Destroy(GetComponent<Collider>());
 			Destroy(GetComponent<Rigidbody>());
 		}
+
 		if (firstAction >= MusicHandler.EarlyType.FadeTo && targetAudioSource.volume != fadeToVolume)
 		{
 			//iTween.AudioTo(targetAudioSource.gameObject, fadeToVolume, targetAudioSource.pitch, fadeToTime);
@@ -91,6 +90,7 @@ public class MusicHandler : MonoBehaviour
 			targetAudioSource.Pause();
 			break;
 		}
+
 		if (destroyColliderAfterUse)
 		{
 			Destroy(gameObject);

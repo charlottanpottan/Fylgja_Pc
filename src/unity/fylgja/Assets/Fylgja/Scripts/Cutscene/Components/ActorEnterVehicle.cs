@@ -24,4 +24,3 @@ public class ActorEnterVehicle : ActorSceneComponent
 		ComponentDone();
 	}
 }
-

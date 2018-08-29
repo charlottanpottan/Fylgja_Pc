@@ -42,12 +42,12 @@ public class PlayerInventoryBag : ActionArbitration
 	{
 		canOpenBag = true;
 	}
-	
+
 	public void SetCanOpenBagState(bool state)
 	{
-		canOpenBag = state;	
+		canOpenBag = state;
 	}
-	
+
 	public override void ExecuteAction(IAvatar _avatar)
 	{
 		canOpenBag = false;

@@ -10,10 +10,9 @@ public class StickFighter : MonoBehaviour
 	public AnimationClip struckLeft;
 	public AnimationClip struckRight;
 	public float anticipationDuringPunchTime = 1.0f;
-	
-	
+
 	public GameObject barObject;
-	
+
 	[HideInInspector]
 	public Animation barAnim = null;
 
@@ -30,7 +29,7 @@ public class StickFighter : MonoBehaviour
 		Debug.Log("StickFighter start!!");
 		health = maxHealth;
 		damageStar = 0;
-		
+
 		GameObject go = GameObject.Instantiate(barObject) as GameObject;
 		barAnim = go.GetComponent<Animation>();
 		barAnim[barAnim.clip.name].normalizedSpeed = 0;
@@ -120,12 +119,14 @@ public class StickFighter : MonoBehaviour
 		health -= takenDamage;
 		float h = maxHealth;
 		barAnim[barAnim.clip.name].normalizedTime += takenDamage / h;
+
 		if (health == 0)
 		{
 			OnLostAllHealth();
 			return;
 		}
 		Debug.Log("Fighter received hit. Health:" + health);
+
 		if (health % 3 == 0)
 		{
 			ReceiveDamageStar();

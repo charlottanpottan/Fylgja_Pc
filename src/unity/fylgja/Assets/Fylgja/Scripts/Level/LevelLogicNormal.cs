@@ -10,14 +10,10 @@ public class LevelLogicNormal : MonoBehaviour
 	public MinimapSurface minimapSurface;
 	public QuestManager quests;
 
-
 	void Start()
 	{
 		Global.levelId = null;
-
 	}
-
-
 
 	public void OnPlayerEnter(Player player)
 	{
@@ -28,13 +24,12 @@ public class LevelLogicNormal : MonoBehaviour
 		var checkpointId = player.playerStorage.playerData().startingCheckpointId;
 		DebugUtilities.Assert(checkpointId != null, "Starting ChecckpointId");
 		var checkpoint = checkpointManager.PlayerCheckpointFromId(checkpointId);
+
 		if (checkpoint == null)
 		{
 			checkpoint = checkpointManager.DebugFirstCheckpoint();
 		}
 		Debug.Log("Spawning:" + characterAvatarToSpawn.name);
-
-
 
 		var characterObject = InstantiateControlledAvatar(characterAvatarToSpawn, checkpoint.spawnTransform);
 		// var characterObject = characterAvatarToSpawn;
@@ -80,9 +75,7 @@ public class LevelLogicNormal : MonoBehaviour
 	{
 		GameObject characterObject;
 
-			characterObject = Instantiate(characterAvatarToSpawn, spawnTransform.position, spawnTransform.rotation) as GameObject;
-		 return characterObject;
+		characterObject = Instantiate(characterAvatarToSpawn, spawnTransform.position, spawnTransform.rotation) as GameObject;
+		return characterObject;
 	}
-
 }
-

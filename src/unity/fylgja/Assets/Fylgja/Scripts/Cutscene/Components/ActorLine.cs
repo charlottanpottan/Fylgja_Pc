@@ -41,20 +41,20 @@ public class ActorLine : ActorSceneComponent
 	public bool blendCustomAnimation;
 	public float customAnimationCrossfadeTime = 0.1f;
 	public float delayAfter;
-	
+
 	public string subtitle;
 
 	static string lastConversationWithNpc;
 	static string lastSpeakerName;
 	static string lastTalkingToActorName;
-	
+
 	bool setupCameraAngle;
-	
+
 	LogicCameraInfo preparedCameraInfo = new LogicCameraInfo();
 
 	SceneActor speakingActor;
 	bool switchedActorAndCamera;
-	
+
 	void SetCameraMovement()
 	{
 		switch (shotMovement)
@@ -91,6 +91,7 @@ public class ActorLine : ActorSceneComponent
 	void Close()
 	{
 		IAvatar avatar = actingInScene.GetMainAvatar();
+
 		avatar.OnSubtitleStop();
 		StopFacialAnimation(speakingActor);
 		ComponentDone();
@@ -111,19 +112,22 @@ public class ActorLine : ActorSceneComponent
 		{
 			return;
 		}
+
 		if (actorClip != null && actingInScene.GetGameObject().GetComponent<AudioSource>().isPlaying)
 		{
 			return;
 		}
-		
+
 		if (actorClip != null)
 		{
 			IAvatar avatar = actingInScene.GetMainAvatar();
 			avatar.OnSubtitleStop();
 		}
+
 		if (customAnimation != null)
 		{
 			var currentAnimation = speakingActor.GetComponent<Animation>()[customAnimation.name];
+
 			if (currentAnimation.normalizedTime < 1.0 && speakingActor.GetComponent<Animation>().IsPlaying(customAnimation.name))
 			{
 				return;
@@ -156,12 +160,12 @@ public class ActorLine : ActorSceneComponent
 		}
 	}
 
-
 	float FramingAngleFromPositions(Vector3 source, Vector3 target, Color color, float debugRotation)
 	{
 		const float duration = 2.0f;
 		var vectorToTarget = target - source;
 		var length = vectorToTarget.magnitude;
+
 		Debug.DrawRay(source, vectorToTarget, color, duration);
 
 		var angleToTarget = Mathf.Atan2(-vectorToTarget.y, length) * Mathf.Rad2Deg;
@@ -180,11 +184,12 @@ public class ActorLine : ActorSceneComponent
 		// vectorToTarget.y = 0;
 		// vectorToTarget.Normalize();
 		var angleToTarget = Mathf.Atan2(vectorToTarget.x, vectorToTarget.z) * Mathf.Rad2Deg;
+
 		//Debug.DrawRay(source, vectorToTarget, color, 10.0f);
 
 		return angleToTarget;
 	}
-	
+
 	void CalculateFramingCamera(Vector3 cameraPosition, Vector3 upper, Vector3 lower, out float angle, float rotationAroundY)
 	{
 		const float duration = 2.0f;
@@ -201,6 +206,7 @@ public class ActorLine : ActorSceneComponent
 	{
 		var angleToSource = AngleFromPositions(cameraPosition, source, new Color(0.0f, 1.0f, 0, 1.0f));
 		var angleToTarget = AngleFromPositions(cameraPosition, target, new Color(0.0f, 1.0f, 0.5f, 1.0f));
+
 		fov = Angle.AngleDiff(angleToSource, angleToTarget) + 10.0f;
 		angle = Angle.AngleMiddle(angleToSource, angleToTarget);
 
@@ -220,7 +226,7 @@ public class ActorLine : ActorSceneComponent
 
 		return optimalDistance;
 	}
-	
+
 	public void UpdateCamera(ref LogicCameraInfo cameraInfo)
 	{
 		if (switchedActorAndCamera)
@@ -232,7 +238,7 @@ public class ActorLine : ActorSceneComponent
 		preparedCameraInfo.useSourcePosition = true;
 		cameraInfo = preparedCameraInfo;
 	}
-	
+
 	void SetupCameraSwitch()
 	{
 		var currentTalkingToActorName = TalkingToActorName;
@@ -250,23 +256,24 @@ public class ActorLine : ActorSceneComponent
 			Debug.Log("Talking actor to actor:" + speakingActor.name);
 			LookAtActorFromActor(speakingActor, talkingTo, currentTalkingToActorName == "Tyra" ? 1 : -1, out preparedCameraInfo.sourcePosition, out preparedCameraInfo.targetPosition);
 		}
-	} 
+	}
 
 	protected override void Act()
 	{
 		switchedActorAndCamera = true; //(lastSpeakerName != null && (actorName != lastSpeakerName || TalkingToActorName != lastTalkingToActorName));
+
 		if (switchedActorAndCamera)
 		{
 			Debug.Log("SWITCHED CAMERA!");
 		}
 		DebugUtilities.Assert(actorName != null, "You tried to find a null speak actor in line:" + name);
 		speakingActor = actingInScene.GetSceneActor(actorName);
-		
+
 		if (!speakingActor.IsInScene())
 		{
 			speakingActor.ActorSceneEnter();
 		}
-		
+
 		var currentTalkingToActorName = TalkingToActorName;
 
 		if (actorClip != null)
@@ -285,6 +292,7 @@ public class ActorLine : ActorSceneComponent
 		{
 			PlayCustomAnimation(speakingActor, customAnimation);
 		}
+
 		if (actorName != "Tyra")
 		{
 			lastConversationWithNpc = actorName;
@@ -293,7 +301,7 @@ public class ActorLine : ActorSceneComponent
 		{
 			lastConversationWithNpc = currentTalkingToActorName;
 		}
-		
+
 		setupCameraAngle = true;
 	}
 
@@ -339,6 +347,7 @@ public class ActorLine : ActorSceneComponent
 		var framingAngle = 0.0f;
 
 		var angle = talkingTo.transform.eulerAngles.y + 180.0f;
+
 		CalculateFramingCamera(cameraPosition, upper, lower, out framingAngle, angle);
 		sourcePosition = cameraPosition;
 		targetPosition = cameraPosition + Quaternion.Euler(framingAngle, angle, 0) * Vector3.forward;
@@ -359,11 +368,11 @@ public class ActorLine : ActorSceneComponent
 			shoulderPosition = shoulderActor.rightShoulderTransform.position;
 			shoulderFactor = 1.0f;
 		}
-		
+
 		var deltaPositionFromShouldToFace = toActor.FacePosition() - shoulderPosition;
 		var actorToActorRotation = Quaternion.LookRotation(deltaPositionFromShouldToFace);
 		var cameraPosition = shoulderPosition + actorToActorRotation * new Vector3(shoulderFactor * 0.8f, 0.2f, -1.5f);
-		
+
 		var angle = 0.0f;
 		var calculatedFov = 0.0f;
 		CalculateCinematicCamera(cameraPosition, shoulderActor.FacePosition(), toActor.FacePosition(), out angle, out calculatedFov);
@@ -384,30 +393,30 @@ public class ActorLine : ActorSceneComponent
 	void SetShotComposition(SceneActor actorToLookAt, float faceRadius, ShotComposition composition)
 	{
 /*
-		float radius;
-		float yOffset = 0;
+                float radius;
+                float yOffset = 0;
 
-		switch (composition)
-		{
-		case ShotComposition.LongShot:
-			radius = faceRadius * 5.0f;
-			yOffset = 0;
-			break;
+                switch (composition)
+                {
+                case ShotComposition.LongShot:
+                        radius = faceRadius * 5.0f;
+                        yOffset = 0;
+                        break;
 
-		case ShotComposition.MediumShot:
-			radius = faceRadius * 2.5f;
-			yOffset = -0.15f;
-			break;
+                case ShotComposition.MediumShot:
+                        radius = faceRadius * 2.5f;
+                        yOffset = -0.15f;
+                        break;
 
-		case ShotComposition.CloseUp:
-			radius = faceRadius * 2.0f;
-			yOffset = -0.08f;
-			break;
+                case ShotComposition.CloseUp:
+                        radius = faceRadius * 2.0f;
+                        yOffset = -0.08f;
+                        break;
 
-		default:
-			radius = 0;
-			break;
-		}
+                default:
+                        radius = 0;
+                        break;
+                }
 */
 	}
 
@@ -420,7 +429,6 @@ public class ActorLine : ActorSceneComponent
 	{
 		actorToStopSpeaking.StopFacialAnimation();
 	}
-
 
 	void PlayRandomGesture(SceneActor actorToGesture)
 	{
@@ -455,7 +463,3 @@ public class ActorLine : ActorSceneComponent
 	 * }
 	 */
 }
-
-
-
-

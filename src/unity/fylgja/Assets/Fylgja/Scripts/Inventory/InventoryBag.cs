@@ -24,6 +24,4 @@ public class InventoryBag : ActionArbitration
 	{
 		Destroy(gameObject);
 	}
-
 }
-

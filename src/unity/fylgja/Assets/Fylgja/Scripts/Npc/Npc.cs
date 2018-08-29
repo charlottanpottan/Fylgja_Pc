@@ -31,6 +31,7 @@ public class Npc : ActionArbitration
 		else if (questGiver != null)
 		{
 			var questToOffer = questGiver.QuestForAvatar(avatar.avatarQuest);
+
 			if (questToOffer != null)
 			{
 				return true;

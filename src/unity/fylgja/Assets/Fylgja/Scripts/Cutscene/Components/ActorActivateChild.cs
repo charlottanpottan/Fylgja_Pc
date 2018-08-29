@@ -10,11 +10,11 @@ public class ActorActivateChild : ActorSceneComponent
 	protected override void Act()
 	{
 		var actorObject = actingInScene.GetActor(actorName);
-		
+
 		Transform t = actorObject.transform.Find(gameObjectToActivate);
-		
+
 		t.gameObject.active = activationState;
-		
+
 		ComponentDone();
 	}
 

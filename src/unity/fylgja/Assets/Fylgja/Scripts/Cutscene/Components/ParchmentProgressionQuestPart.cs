@@ -19,6 +19,4 @@ public class ParchmentProgressionQuestPart : ActorSceneComponent
 	public override void Skip()
 	{
 	}
-
 }
-

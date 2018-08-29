@@ -4,14 +4,13 @@ using System.Collections;
 public class ChangeQualityLevelAction : ActionArbitration
 {
 	public QualityLevel targetQuality;
-	
+
 	public AudioClip clickAudio;
-	
+
 	public AudioHandler audioHandler;
 	public float audioVolume = 0.2f;
 
 	public Renderer targetRenderer;
-
 
 	void Awake()
 	{
@@ -20,7 +19,7 @@ public class ChangeQualityLevelAction : ActionArbitration
 
 	public override void ExecuteAction(IAvatar avatar)
 	{
-		if(clickAudio != null)
+		if (clickAudio != null)
 		{
 			audioHandler.CreateAndPlay(clickAudio, audioVolume);
 		}
@@ -28,13 +27,12 @@ public class ChangeQualityLevelAction : ActionArbitration
 		{
 			audioHandler.CreateAndPlay(audioVolume);
 		}
-		
+
 		QualitySettings.currentLevel = targetQuality;
 		Camera.main.SendMessage("ChangeQualityLevel", SendMessageOptions.DontRequireReceiver);
 		Debug.Log(QualitySettings.currentLevel);
 		transform.parent.BroadcastMessage("CheckQualityLevel");
 	}
-
 
 	public void CheckQualityLevel()
 	{

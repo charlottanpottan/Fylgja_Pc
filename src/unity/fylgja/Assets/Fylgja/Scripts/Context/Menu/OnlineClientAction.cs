@@ -10,7 +10,7 @@ public class OnlineClientAction : ActionArbitration
 
 	public override void ExecuteAction(IAvatar avatar)
 	{
-		if(clickAudio != null)
+		if (clickAudio != null)
 		{
 			DontDestroyOnLoad(audioHandler.CreateAndPlay(clickAudio, audioVolume));
 		}
@@ -22,4 +22,3 @@ public class OnlineClientAction : ActionArbitration
 		Instantiate(clientToSpawn);
 	}
 }
-

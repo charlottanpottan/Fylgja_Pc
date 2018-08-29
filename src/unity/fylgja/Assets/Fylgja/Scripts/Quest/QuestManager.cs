@@ -20,4 +20,3 @@ public class QuestManager : MonoBehaviour
 		return null;
 	}
 }
-

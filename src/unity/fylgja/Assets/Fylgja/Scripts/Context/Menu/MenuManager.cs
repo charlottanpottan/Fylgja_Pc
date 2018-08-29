@@ -6,9 +6,9 @@ public class MenuManager : MonoBehaviour
 	public GameObject menuObject;
 	public bool entryMenu;
 	public Player player;
-	
+
 	AllowedToInteractModifier allowedToInteract;
-	
+
 	void Awake()
 	{
 		if (!entryMenu)
@@ -24,7 +24,7 @@ public class MenuManager : MonoBehaviour
 			ToggleMenu();
 		}
 	}
-	
+
 	void ShowMenu(bool on)
 	{
 		menuObject.SetActiveRecursively(on);
@@ -33,6 +33,7 @@ public class MenuManager : MonoBehaviour
 	public void ToggleMenu()
 	{
 		Debug.Log("Toggle menu");
+
 		if (menuObject.active != true)
 		{
 			PauseGame();
@@ -42,7 +43,7 @@ public class MenuManager : MonoBehaviour
 			ResumeGame();
 		}
 	}
-	
+
 	void PauseGame()
 	{
 		ShowMenu(true);
@@ -52,14 +53,14 @@ public class MenuManager : MonoBehaviour
 		player.AssignedAvatar().AddAllowedToInteractModifier(allowedToInteract);
 		player.playerInteraction.OnAllowedToUseUI(true);
 	}
-	
+
 	void ResumeGame()
 	{
 		player.AssignedAvatar().RemoveAllowedToInteractModifier(allowedToInteract);
 		allowedToInteract = null;
 		ContinueGame();
 	}
-	
+
 	void ContinueGame()
 	{
 		ShowMenu(false);

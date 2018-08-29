@@ -10,10 +10,10 @@ public class MouseMenuEffects : MonoBehaviour
 	public AudioClip mouseOverSound;
 	[HideInInspector]
 	public bool mouseOver;
-	
+
 	void OnMouseEnter()
 	{
-		if(mouseOverSound != null)
+		if (mouseOverSound != null)
 		{
 			audioHandler.CreateAndPlay(mouseOverSound, audioVolume);
 		}
@@ -23,7 +23,7 @@ public class MouseMenuEffects : MonoBehaviour
 		}
 		mouseOver = true;
 	}
-	
+
 	void OnMouseExit()
 	{
 		mouseOver = false;
@@ -33,7 +33,7 @@ public class MouseMenuEffects : MonoBehaviour
 	{
 		if (targetRenderer.material.HasProperty("_BlendRange"))
 		{
-			if(mouseOver == true)
+			if (mouseOver == true)
 			{
 				targetRenderer.material.SetFloat("_BlendRange", Mathf.Clamp01(targetRenderer.material.GetFloat("_BlendRange") + blendRate));
 			}

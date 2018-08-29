@@ -9,9 +9,11 @@ public class ActionArbitration : MonoBehaviour
 	{
 		return true;
 	}
+
 	public virtual void ExecuteAction(IAvatar avatar)
 	{
 	}
+
 	public virtual Transform AvatarInteractTransform(IAvatar avatar)
 	{
 		return null;
@@ -37,6 +39,7 @@ public class ActionArbitration : MonoBehaviour
 		else
 		{
 			ExecuteAction(avatar);
+
 			if (actorScenePrefab != null)
 			{
 				PerformAction(avatar);

@@ -12,4 +12,3 @@ public class QuestPartNotification
 		part = _part;
 	}
 }
-

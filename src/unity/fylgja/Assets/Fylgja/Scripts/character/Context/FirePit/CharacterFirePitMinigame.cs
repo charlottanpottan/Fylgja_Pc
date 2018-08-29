@@ -55,4 +55,3 @@ public class CharacterFirePitMinigame : MonoBehaviour
 		SetEquipmentEnable(false);
 	}
 }
-

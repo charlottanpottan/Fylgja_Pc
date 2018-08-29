@@ -27,6 +27,7 @@ public class Interactable : MonoBehaviour
 	public static Interactable GetInteractableFromName(string name)
 	{
 		var interactableObjects = GameObject.FindGameObjectsWithTag("Interactable");
+
 		foreach (var interactableObject in interactableObjects)
 		{
 			if (interactableObject.name == name)
@@ -42,18 +43,18 @@ public class Interactable : MonoBehaviour
 	public void StartMouseOverEffect()
 	{
 		const float intensity = 2.0f;
-		
-		if(rendererToHighlight != null)
+
+		if (rendererToHighlight != null)
 		{
 			rendererToHighlight.materials[materialIndex].color = new Color(intensity, intensity, intensity, 1.0f);
 		}
-		
+
 		isHighlighted = true;
 	}
 
 	public void StopMouseOverEffect()
 	{
-		if(rendererToHighlight != null)
+		if (rendererToHighlight != null)
 		{
 			rendererToHighlight.materials[materialIndex].color = initialColor;
 		}

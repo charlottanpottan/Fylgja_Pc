@@ -70,12 +70,10 @@ public class ActorCompleteComponents : ActorSceneComponent, ActorSceneComponentN
 		ComponentDone();
 	}
 
-
 	public bool IsResuming()
 	{
 		return actingInScene.IsResuming();
 	}
-
 
 	public GameObject GetActor(string name)
 	{

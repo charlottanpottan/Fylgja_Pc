@@ -7,7 +7,6 @@ public class LoadingLogic : MonoBehaviour
 	public LevelLoader targetLoader;
 	//public Renderer targetRenderer;
 
-
 	void Start()
 	{
 		targetLoader.LoadLevel(Global.levelId);

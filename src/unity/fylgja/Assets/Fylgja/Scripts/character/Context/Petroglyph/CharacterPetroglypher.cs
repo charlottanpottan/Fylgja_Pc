@@ -69,7 +69,6 @@ public class CharacterPetroglypher : MonoBehaviour
 		holdingPetroglyph = null;
 	}
 
-
 	void RotatePetroglyph()
 	{
 		if (holdingPetroglyph == null)
@@ -102,6 +101,7 @@ public class CharacterPetroglypher : MonoBehaviour
 		var targetRotation = new Quaternion();
 
 		bool movedWithMouse = GetMouseTargetTransform(out targetPosition, out targetRotation);
+
 		if (movedWithMouse)
 		{
 			var warpPosition = holdingPetroglyph.transform.position;
@@ -159,14 +159,15 @@ public class CharacterPetroglypher : MonoBehaviour
 			DropPetroglyph();
 		}
 		Debug.Log("Picked up Petroglyph");
-		
+
 		audioHandler.TriggerSound();
-		
+
 		holdingPetroglyph = petroglyph;
 
 		var targetPosition = new Vector3();
 		var targetRotation = new Quaternion();
 		bool mouseIsUsed = GetMouseTargetTransform(out targetPosition, out targetRotation);
+
 		if (mouseIsUsed)
 		{
 			pickingOffset = holdingPetroglyph.transform.position - targetPosition;

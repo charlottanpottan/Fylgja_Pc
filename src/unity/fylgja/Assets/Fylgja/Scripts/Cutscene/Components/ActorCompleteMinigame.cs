@@ -50,12 +50,14 @@ public class ActorCompleteMinigame : ActorSceneComponent
 	void PlayScene(GameObject actorScenePrefab)
 	{
 		var scene = ActorSceneUtility.CreateSceneWithAvatar(actorScenePrefab, actingInScene.GetMainAvatar());
+
 		scene.PlayScene(actingInScene.GetMainAvatar().playerNotifications);
 	}
 
 	void OnFailed()
 	{
 		Debug.Log("On Failed minigame!");
+
 		if (failedMinigameScene != null)
 		{
 			PlayScene(failedMinigameScene);

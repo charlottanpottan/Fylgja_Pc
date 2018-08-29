@@ -30,6 +30,7 @@ public class MinimapCamera : MonoBehaviour
 		Vector3 objectPos = objectToFollow.gameObject.transform.position;
 
 		targetY = CalculateY();
+
 		if (targetY <= 0.0f)
 		{
 			targetY = highestY;
@@ -66,6 +67,7 @@ public class MinimapCamera : MonoBehaviour
 		foreach (var interactable in interactables)
 		{
 			var distance = DistanceToObject(interactable);
+
 			if (distance > maxDistance)
 			{
 				maxDistance = distance;
@@ -75,4 +77,3 @@ public class MinimapCamera : MonoBehaviour
 		return maxDistance;
 	}
 }
-

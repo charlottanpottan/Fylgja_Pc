@@ -6,12 +6,12 @@ public class FadeListener : MonoBehaviour
 //	public AudioListener audioListener;
 //	public iTween.EaseType easeType;
 //	public float fadeInTime = 3.0f;
-	
+
 	public float fadeSpeed = 3;
-	
+
 	float volume;
 	float targetVolume;
-	
+
 	void Awake()
 	{
 		OnFadeListener(0);
@@ -21,10 +21,10 @@ public class FadeListener : MonoBehaviour
 	{
 		targetVolume = 1.0f;
 	}
-	
+
 	public void SetTargetVolume(float v)
 	{
-		targetVolume = v;	
+		targetVolume = v;
 	}
 
 	void Update()

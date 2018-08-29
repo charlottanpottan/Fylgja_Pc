@@ -55,7 +55,6 @@ public class VehicleInput : PlayerInput
 		vehicle.FeedInput();
 	}
 
-
 	private void FetchCamera()
 	{
 		if (Camera.main == null)

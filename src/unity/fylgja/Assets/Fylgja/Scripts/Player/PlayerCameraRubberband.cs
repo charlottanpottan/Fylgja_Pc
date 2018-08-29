@@ -39,8 +39,8 @@ public class PlayerCameraRubberband : LogicCamera
 		pivotDistance *= 0.98f;
 		info.pivotDistance += pivotDistance;
 
-
 		float timedDistance = info.pivotDistance * Time.deltaTime;
+
 		if (timedDistance < 0.0001f)
 		{
 			return;
@@ -58,7 +58,7 @@ public class PlayerCameraRubberband : LogicCamera
 		info.targetMovementFactor = Mathf.Min(Mathf.Min(offsetRubberBandStrength + distanceRubberBandStrength, 1.0f) * info.targetVelocity.magnitude * 0.6f, 1.0f);
 //		Debug.Log("Movement:" + info.targetMovementFactor + " offset:" + offsetRubberBandStrength + " distance:" + distanceRubberBandStrength + " velocity:" + info.targetVelocity.magnitude);
 	}
-	
+
 	public override void SetCameraPivot(ref LogicCameraInfo cameraInfo, Vector2 targetPivot)
 	{
 	}

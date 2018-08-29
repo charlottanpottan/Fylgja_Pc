@@ -10,7 +10,7 @@ public class OnlineHostAction : ActionArbitration
 
 	public override void ExecuteAction(IAvatar avatar)
 	{
-		if(clickAudio != null)
+		if (clickAudio != null)
 		{
 			DontDestroyOnLoad(audioHandler.CreateAndPlay(clickAudio, audioVolume));
 		}
@@ -21,4 +21,3 @@ public class OnlineHostAction : ActionArbitration
 		Instantiate(serverToSpawn);
 	}
 }
-

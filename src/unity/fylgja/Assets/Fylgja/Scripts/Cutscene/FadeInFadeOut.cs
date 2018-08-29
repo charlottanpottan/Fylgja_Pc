@@ -4,13 +4,14 @@ using System.Collections;
 public class FadeInFadeOut : MonoBehaviour
 {
 	public delegate void DelegateFadeIn();
+
 	public DelegateFadeIn OnFadeIn;
 
 	public delegate void DelegateFadeOut();
-	public DelegateFadeOut OnFadeOut;
-	
-	private FadeListener fadeListener;
 
+	public DelegateFadeOut OnFadeOut;
+
+	private FadeListener fadeListener;
 
 	enum FadeDirection
 	{
@@ -25,11 +26,13 @@ public class FadeInFadeOut : MonoBehaviour
 	{
 		iTween.CameraFadeAdd();
 	}
-	
+
 	void Start()
 	{
-		if(GameObject.FindGameObjectWithTag("Listener") != null)
+		if (GameObject.FindGameObjectWithTag("Listener") != null)
+		{
 			fadeListener = GameObject.FindGameObjectWithTag("Listener").GetComponent<FadeListener>();
+		}
 	}
 
 	Hashtable ht = new Hashtable();
@@ -62,7 +65,7 @@ public class FadeInFadeOut : MonoBehaviour
 		fadeDirection = FadeInFadeOut.FadeDirection.FadeOut;
 		iTween.CameraFadeTo(ht);
 	}
-	
+
 	public void SetTargetVolume(float targetVolume)
 	{
 		fadeListener.SetTargetVolume(targetVolume);
@@ -77,18 +80,21 @@ public class FadeInFadeOut : MonoBehaviour
 	public void SetToBlack()
 	{
 		GUITexture guiT = GameObject.Find("iTween Camera Fade").GetComponent<GUITexture>();
+
 		guiT.color = new Vector4(guiT.color.r, guiT.color.g, guiT.color.b, 1);
 	}
 
 	public void SetToTransparent()
 	{
 		GUITexture guiT = GameObject.Find("iTween Camera Fade").GetComponent<GUITexture>();
+
 		guiT.color = new Vector4(guiT.color.r, guiT.color.g, guiT.color.b, 0);
 	}
 
 	void OnFadeInComplete()
 	{
 		Debug.Log(Time.time + ": FadeInComplete");
+
 		if (OnFadeIn != null)
 		{
 			OnFadeIn();
@@ -98,6 +104,7 @@ public class FadeInFadeOut : MonoBehaviour
 	void OnFadeOutComplete()
 	{
 		Debug.Log(Time.time + ": FadeOutComplete");
+
 		if (OnFadeOut != null)
 		{
 			OnFadeOut();
@@ -125,6 +132,5 @@ public class FadeInFadeOut : MonoBehaviour
 			Debug.LogWarning("Faded for unknown reason");
 			break;
 		}
-
 	}
 }

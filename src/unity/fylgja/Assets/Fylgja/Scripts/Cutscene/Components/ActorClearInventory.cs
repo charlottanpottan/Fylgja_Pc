@@ -25,4 +25,3 @@ public class ActorClearInventory : ActorSceneComponent
 		Close();
 	}
 }
-

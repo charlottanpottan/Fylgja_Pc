@@ -40,9 +40,9 @@ public class CharacterOpponentStickFight : StickFighter
 	void OnStickFightMinigameStart(StickFightMinigame minigame)
 	{
 		InitStickFighter();
-		
+
 		stickToActivate.active = true;
-		
+
 		GetComponent<Animation>()[blockPose.name].layer = 4;
 		GetComponent<Animation>()[blockLeft.name].layer = 5;
 		GetComponent<Animation>()[blockRight.name].layer = 5;
@@ -52,9 +52,9 @@ public class CharacterOpponentStickFight : StickFighter
 		GetComponent<Animation>()[hitRight.name].layer = 5;
 		GetComponent<Animation>()[combinationPunch.name].layer = 5;
 		GetComponent<Animation>()[dizzyAfterCombination.name].layer = 5;
-		
+
 		GetComponent<Animation>().Play(blockPose.name);
-		
+
 		base.StickFightMinigameStart(minigame);
 	}
 
@@ -130,13 +130,14 @@ public class CharacterOpponentStickFight : StickFighter
 		StickFighterState state = GetState();
 
 		Debug.Log("Opponent received potential hit left: " + state);
+
 		if (state == StickFighterState.StartingRightPunch || (state == StickFighterState.Flinching && flinchCountInRow < 3) || state == StickFighterState.Dizzy)
 		{
 			ReceivedHitLeft();
 		}
 		else
 		{
-			if(state != StickFighterState.StartingLeftPunch && state != StickFighterState.CombinationPunch && state != StickFighterState.LeftPunch && state != StickFighterState.RightPunch)
+			if (state != StickFighterState.StartingLeftPunch && state != StickFighterState.CombinationPunch && state != StickFighterState.LeftPunch && state != StickFighterState.RightPunch)
 			{
 				GetComponent<Animation>().CrossFade(blockLeft.name, blockCrossFadeTime);
 			}
@@ -151,13 +152,14 @@ public class CharacterOpponentStickFight : StickFighter
 		StickFighterState state = GetState();
 
 		Debug.Log("Opponent received potential hit right: " + state);
+
 		if (state == StickFighterState.StartingLeftPunch || (state == StickFighterState.Flinching && flinchCountInRow < 3) || state == StickFighterState.Dizzy)
 		{
 			ReceivedHitRight();
 		}
 		else
 		{
-			if(state != StickFighterState.StartingRightPunch && state != StickFighterState.CombinationPunch && state != StickFighterState.LeftPunch && state != StickFighterState.RightPunch)
+			if (state != StickFighterState.StartingRightPunch && state != StickFighterState.CombinationPunch && state != StickFighterState.LeftPunch && state != StickFighterState.RightPunch)
 			{
 				GetComponent<Animation>().CrossFade(blockRight.name, blockCrossFadeTime);
 			}
@@ -170,4 +172,3 @@ public class CharacterOpponentStickFight : StickFighter
 		stickFightGame.OnOpponentLost();
 	}
 }
-

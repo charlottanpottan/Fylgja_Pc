@@ -10,11 +10,14 @@ public class FloatableWaterPlane : MonoBehaviour
 	public float currentStrength = 2f;
 
 	private static FloatableWaterPlane s_Instance = null;
-	public static FloatableWaterPlane instance {
-		get {
+	public static FloatableWaterPlane instance
+	{
+		get
+		{
 			if (s_Instance == null)
 			{
 				s_Instance = FindObjectOfType(typeof(FloatableWaterPlane)) as FloatableWaterPlane;
+
 				if (s_Instance == null)
 				{
 					Debug.Log("There's no instance of WaterPlane in the scene");

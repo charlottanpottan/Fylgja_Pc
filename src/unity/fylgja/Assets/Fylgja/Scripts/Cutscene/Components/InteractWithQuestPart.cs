@@ -48,10 +48,10 @@ public class InteractWithQuestPart : ActorSceneComponent
 	public void OnInteractWith(Interactable interactable)
 	{
 		Debug.Log("OnInteractWith:" + interactable.name);
+
 		if (interactable.name == interactableName)
 		{
 			Close();
 		}
 	}
-
 }

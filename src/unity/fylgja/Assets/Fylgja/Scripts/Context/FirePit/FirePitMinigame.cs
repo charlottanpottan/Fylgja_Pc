@@ -21,7 +21,7 @@ public class FirePitMinigame : Minigame, IFirePitNotifications
 	void Update()
 	{
 	}
-	
+
 	public override bool AllowedToMove()
 	{
 		return true;
@@ -52,6 +52,7 @@ public class FirePitMinigame : Minigame, IFirePitNotifications
 		GetComponent<AudioSource>().clip = music;
 		GetComponent<AudioSource>().Play();
 		Debug.Log("FirePitMinigame request start!");
+
 		if (IsMinigameStarted())
 		{
 			return;
@@ -73,7 +74,7 @@ public class FirePitMinigame : Minigame, IFirePitNotifications
 	public override void QuitMinigame()
 	{
 		Debug.Log("Closed minigame!");
-		
+
 		foreach (FirePit firePit in firePits)
 		{
 			firePit.ResetFire();
@@ -110,4 +111,3 @@ public class FirePitMinigame : Minigame, IFirePitNotifications
 		base.CompletedMinigame();
 	}
 }
-

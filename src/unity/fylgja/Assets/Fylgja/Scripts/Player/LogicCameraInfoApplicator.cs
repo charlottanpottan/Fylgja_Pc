@@ -12,13 +12,13 @@ public class LogicCameraInfoApplicator : MonoBehaviour
 	LogicCamera logicCamera;
 	Transform objectToFollow;
 	Vector3 oldTargetPosition;
-	
+
 	float rotationVelocityX = 0.0f;
 	float rotationVelocityY = 0.0f;
 
 	float rotationX = 0.0f;
 	float rotationY = 0.0f;
-	
+
 	[HideInInspector]
 	public float currentFov;
 
@@ -26,7 +26,6 @@ public class LogicCameraInfoApplicator : MonoBehaviour
 	Vector3 shakePosition = new Vector3(0,0,0);
 	float targetShakePositionLerp = 1.0f;
 
-	
 	LogicCameraInfo cameraInfo = new LogicCameraInfo();
 
 	void Awake()
@@ -39,20 +38,20 @@ public class LogicCameraInfoApplicator : MonoBehaviour
 	{
 		fadeInOut.FadeIn(1f);
 	}
-	
+
 	public void SetLogicCamera(LogicCamera logicCameraToFollow)
 	{
 		DebugUtilities.Assert(logicCameraToFollow != null, "Camera can not be null!");
 		logicCamera = logicCameraToFollow;
 		cameraInfo.cameraSwitched = true;
 	}
-	
+
 	public void SetObjectToFollow(Transform newObjectToFollow)
 	{
 		objectToFollow = newObjectToFollow;
 		oldTargetPosition = objectToFollow.transform.position;
 	}
-	
+
 	public LogicCamera CurrentCamera
 	{
 		get
@@ -60,9 +59,7 @@ public class LogicCameraInfoApplicator : MonoBehaviour
 			return logicCamera;
 		}
 	}
-	
 
-	
 	void ShakeCamera()
 	{
 		if (targetShakePositionLerp >= 1.0f)
@@ -75,7 +72,7 @@ public class LogicCameraInfoApplicator : MonoBehaviour
 		var deltaPosition = Vector3.Lerp(shakePosition, targetShakePosition, targetShakePositionLerp);
 		targetShakePositionLerp += Time.deltaTime * 7.0f;
 		// transform.position += camera.transform.TransformDirection(deltaPosition);
-		
+
 		rotationVelocityX += -rotationVelocityX * 5.0f * Time.deltaTime - rotationX;
 		rotationVelocityY += -rotationVelocityY * 5.0f * Time.deltaTime - rotationY;
 
@@ -115,15 +112,17 @@ public class LogicCameraInfoApplicator : MonoBehaviour
 		cameraInfo.pivotRotationIsDefined = false;
 		cameraInfo.useSourcePosition = false;
 		cameraInfo.useTargetPosition = false;
-		
+
 		cameraInfo.fov = currentFov;
-		
+
 		logicCamera.UpdateCamera(ref cameraInfo);
-		
+
 		GetComponent<Camera>().fieldOfView = cameraInfo.fov;
+
 		if (cameraInfo.useSourcePosition)
 		{
 			var deltaPosition = cameraInfo.targetPosition - cameraInfo.sourcePosition;
+
 			if (deltaPosition.magnitude > 0.01f)
 			{
 				transform.rotation = Quaternion.LookRotation(deltaPosition);
@@ -144,7 +143,7 @@ public class LogicCameraInfoApplicator : MonoBehaviour
 		}
 		cameraInfo.cameraSwitched = false;
 	}
-	
+
 	public void CameraSetPivot(Vector2 targetPivot)
 	{
 		logicCamera.SetCameraPivot(ref cameraInfo, targetPivot);

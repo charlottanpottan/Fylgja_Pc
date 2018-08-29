@@ -99,6 +99,7 @@ public class CharacterStickFight : StickFighter
 	public override void OnReceivedHitFromLeft()
 	{
 		Debug.Log("Tyra: Received Hit From Left");
+
 		if (IsDucking())
 		{
 			return;
@@ -109,6 +110,7 @@ public class CharacterStickFight : StickFighter
 	public override void OnReceivedHitFromRight()
 	{
 		Debug.Log("Tyra: Received Hit From Right");
+
 		if (IsDucking())
 		{
 			return;
@@ -120,14 +122,14 @@ public class CharacterStickFight : StickFighter
 	{
 		SetToolsEnabled(true);
 		GetComponent<Animation>().CrossFade(idle.name);
-		
+
 		GameObject go = GameObject.Instantiate(barObject) as GameObject;
 		health = maxHealth;
 		damageStar = 0;
 		barAnim = go.GetComponent<Animation>();
 		barAnim[barAnim.clip.name].normalizedSpeed = 0;
 		barAnim[barAnim.clip.name].normalizedTime = 0;
-		
+
 		base.StickFightMinigameStart(minigame);
 	}
 

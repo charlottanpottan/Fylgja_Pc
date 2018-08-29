@@ -18,4 +18,3 @@ public class CutsceneInventoryBag : MonoBehaviour
 		avatar.OpenInventoryBag();
 	}
 }
-

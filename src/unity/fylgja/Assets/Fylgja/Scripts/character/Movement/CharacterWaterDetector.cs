@@ -7,17 +7,16 @@ public class CharacterWaterDetector : MonoBehaviour
 
 	void Start ()
 	{
-		
 	}
 
 	void Update ()
 	{
-		
 	}
 
 	void SetInsideWater(bool insideWater)
 	{
 		isInsideWater = insideWater;
+
 		if (isInsideWater)
 		{
 			BroadcastMessage("OnInsideWater");
@@ -45,4 +44,3 @@ public class CharacterWaterDetector : MonoBehaviour
 		}
 	}
 }
-

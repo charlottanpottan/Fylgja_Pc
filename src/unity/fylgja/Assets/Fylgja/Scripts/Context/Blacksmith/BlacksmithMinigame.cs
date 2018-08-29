@@ -79,7 +79,6 @@ public class BlacksmithMinigame : Minigame, IBlacksmithSwordNotifications
 
 	public override void StartMinigame(IAvatar a)
 	{
-		
 		//GameObject go = GameObject.Instantiate(timerObject) as GameObject;
 		//timer = go.GetComponent<BlacksmithTimer>();
 		numberOfCompletedSwords = 0;
@@ -123,6 +122,7 @@ public class BlacksmithMinigame : Minigame, IBlacksmithSwordNotifications
 	public bool OnSwordDone(BlacksmithSword sword)
 	{
 		numberOfCompletedSwords++;
+
 		if (numberOfCompletedSwords == 3)
 		{
 			CompletedMinigame();
@@ -133,5 +133,4 @@ public class BlacksmithMinigame : Minigame, IBlacksmithSwordNotifications
 			return false;
 		}
 	}
-
 }

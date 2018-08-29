@@ -9,6 +9,7 @@ public class FlightPathTrigger : MonoBehaviour
 	void OnTriggerEnter()
 	{
 		targetFlightPath.targetIndex = targetIndex;
+
 		if (iTween.Count(targetFlightPath.gameObject) == 0)
 		{
 			targetFlightPath.FollowRoute();

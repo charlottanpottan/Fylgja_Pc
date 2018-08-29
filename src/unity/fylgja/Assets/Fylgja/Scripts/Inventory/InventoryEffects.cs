@@ -34,7 +34,6 @@ public class InventoryEffects : MonoBehaviour
 		}
 	}
 
-
 	public void OnInventoryAdd(string itemName)
 	{
 		SetQuestItemEnabled(itemName, true);
@@ -48,6 +47,7 @@ public class InventoryEffects : MonoBehaviour
 	void SetQuestItemEnabled(string itemName, bool enabled)
 	{
 		Debug.Log("Setting quest item: " + itemName + " to:" + enabled);
+
 		if (enabled)
 		{
 			for (var i = 0; i < inventoryItemsRoot.transform.childCount; ++i)
@@ -99,5 +99,4 @@ public class InventoryEffects : MonoBehaviour
 		bagAnimation[bagClose.name].normalizedTime = 1.0f;
 		bagAnimation.Play(bagClose.name);
 	}
-
 }

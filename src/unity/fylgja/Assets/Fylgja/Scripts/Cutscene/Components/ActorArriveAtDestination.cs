@@ -7,7 +7,7 @@ public class ActorArriveAtDestination : ActorSceneComponent
 
 	AvatarQuest avatarQuest;
 	GameObject goalObject;
-	
+
 	public override bool AvatarAllowedToMove()
 	{
 		return true;
@@ -17,7 +17,7 @@ public class ActorArriveAtDestination : ActorSceneComponent
 	{
 		return true;
 	}
-	
+
 	protected override void Act()
 	{
 		Debug.Log("Starting Arrive At Destination: " + areaName);
@@ -36,6 +36,7 @@ public class ActorArriveAtDestination : ActorSceneComponent
 	void Close()
 	{
 		var avatar = actingInScene.GetActor("Tyra");
+
 		avatarQuest = avatar.GetComponentInChildren<AvatarQuest>();
 		avatarQuest.RemoveGoalObject(goalObject);
 		ComponentDone();
@@ -50,4 +51,3 @@ public class ActorArriveAtDestination : ActorSceneComponent
 		}
 	}
 }
-

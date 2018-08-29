@@ -5,7 +5,9 @@ public class Minigame : MonoBehaviour
 {
 	protected IAvatar avatar;
 	public delegate void MinigameCompleted();
+
 	public delegate void MinigameFailed();
+
 	public delegate void MinigameQuit();
 
 	bool minigameStarted = false;

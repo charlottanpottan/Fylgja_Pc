@@ -6,14 +6,14 @@ public class MoviePlayer : MonoBehaviour
 	private MovieTexture movie;
 	public bool fadeInAfter = false;
 	public delegate void MovieEnd();
-	
+
 	public FadeInFadeOut fadeInFadeOut;
 	public MovieEnd endFunction;
 	private FadeListener fadeListener;
 	bool movieIsStarted;
 	AvatarToPlayerNotifications playerNotifications;
 	PlayerInteraction.ListenerStackItem listenerHandle;
-	
+
 	void Start()
 	{
 		GetComponent<AudioSource>().ignoreListenerVolume = true;
@@ -29,9 +29,9 @@ public class MoviePlayer : MonoBehaviour
 
 	public void PlayMovie(AvatarToPlayerNotifications playerNotification, MovieTexture movieToPlay, MovieEnd function)
 	{
-		if(fadeListener == null)
+		if (fadeListener == null)
 		{
-			fadeListener = GameObject.FindGameObjectWithTag("Listener").GetComponent<FadeListener>();	
+			fadeListener = GameObject.FindGameObjectWithTag("Listener").GetComponent<FadeListener>();
 		}
 		fadeListener.SetTargetVolume(0);
 		fadeListener.OnFadeListener(0);
@@ -48,7 +48,7 @@ public class MoviePlayer : MonoBehaviour
 
 		movieIsStarted = true;
 		Time.timeScale = 0;
-		
+
 		iTween.Stop(GameObject.Find("iTween Camera Fade"));
 		fadeInFadeOut.SetToBlack();
 	}
@@ -64,11 +64,12 @@ public class MoviePlayer : MonoBehaviour
 
 	public void StopMovie()
 	{
-		if(fadeListener == null)
+		if (fadeListener == null)
 		{
-			fadeListener = GameObject.FindGameObjectWithTag("Listener").GetComponent<FadeListener>();	
+			fadeListener = GameObject.FindGameObjectWithTag("Listener").GetComponent<FadeListener>();
 		}
-		if(fadeInAfter)
+
+		if (fadeInAfter)
 		{
 			fadeListener.SetTargetVolume(1);
 		}
@@ -79,14 +80,13 @@ public class MoviePlayer : MonoBehaviour
 		movieIsStarted = false;
 		Time.timeScale = 1;
 		endFunction();
-		
+
 		iTween.Stop(GameObject.Find("iTween Camera Fade"));
 		fadeInFadeOut.SetToBlack();
 		playerNotifications.DetachListener(listenerHandle);
 		listenerHandle = null;
 		Destroy(transform.root.gameObject);
 	}
-
 
 	void MoviePlayingDone()
 	{

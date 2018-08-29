@@ -13,7 +13,7 @@ public class SwitchMenuAction : ActionArbitration
 
 	public override void ExecuteAction(IAvatar avatar)
 	{
-		if(clickAudio != null)
+		if (clickAudio != null)
 		{
 			audioHandler.CreateAndPlay(clickAudio, audioVolume);
 		}

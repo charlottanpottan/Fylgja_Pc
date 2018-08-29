@@ -16,7 +16,7 @@ public class ToggleSubtitlesAction : ActionArbitration
 
 	public override void ExecuteAction(IAvatar avatar)
 	{
-		if(clickAudio != null)
+		if (clickAudio != null)
 		{
 			audioHandler.CreateAndPlay(clickAudio, audioVolume);
 		}
@@ -31,7 +31,6 @@ public class ToggleSubtitlesAction : ActionArbitration
 
 	void ChangeMaterial()
 	{
-
 		if (targetRenderer.material.HasProperty("_BlendRange"))
 		{
 			if (playerInteraction.player.playerStorage.ShowSubtitles)

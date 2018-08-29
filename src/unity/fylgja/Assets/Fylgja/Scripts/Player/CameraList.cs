@@ -11,12 +11,12 @@ public class CameraList : LogicCamera
 			logicCamera.UpdateCamera(ref info);
 		}
 	}
-	
+
 	public override void SetCameraPivot(ref LogicCameraInfo info, Vector2 targetPivot)
 	{
-		foreach(var logicCamera in cameras)
+		foreach (var logicCamera in cameras)
 		{
-			if(logicCamera is PivotCamera)
+			if (logicCamera is PivotCamera)
 			{
 				logicCamera.SetCameraPivot(ref info, targetPivot);
 			}

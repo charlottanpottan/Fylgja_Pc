@@ -14,7 +14,6 @@ public class QuestParchment : ActionArbitration
 		SetProgression(0.0f);
 	}
 
-
 	void OnQuestParchmentClose()
 	{
 		parchmentCloseHandler.CreateAndPlay(GetComponent<AudioSource>().volume);

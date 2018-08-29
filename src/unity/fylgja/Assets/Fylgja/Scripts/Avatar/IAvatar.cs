@@ -28,6 +28,7 @@ public class IAvatar : MonoBehaviour
 	public void RemoveAllowedToMoveModifier(AllowedToMoveModifier modifier)
 	{
 		allowedToMoveModifiers.Remove(modifier);
+
 		if (allowedToMoveModifiers.Count == 0)
 		{
 			Debug.Log("Removing move modifier:" + modifier + ". You are allowed to move!");
@@ -57,7 +58,7 @@ public class IAvatar : MonoBehaviour
 			SetAllowedToInteract(true);
 		}
 	}
-	
+
 	public virtual void OnSubtitleStart(string text)
 	{
 		if (playerNotifications != null)
@@ -65,6 +66,7 @@ public class IAvatar : MonoBehaviour
 			playerNotifications.OnSubtitleStart(text);
 		}
 	}
+
 	public virtual void OnSubtitleStop()
 	{
 		if (playerNotifications != null)
@@ -92,95 +94,123 @@ public class IAvatar : MonoBehaviour
 	public virtual void Climb(Transform transform)
 	{
 	}
+
 	public virtual void Pickup(Item item)
 	{
 	}
+
 	public virtual void TalkTo(Npc character)
 	{
 	}
+
 	public virtual bool IsInspectingBelongings()
 	{
 		return false;
 	}
+
 	public virtual void OnInspectingBelongingsOpen()
 	{
 	}
+
 	public virtual void OnInspectingBelongingsClose()
 	{
 	}
+
 	public virtual void OpenInventoryBag()
 	{
 	}
+
 	public virtual void CloseInventoryBag()
 	{
 	}
+
 	public virtual void ShowQuestParchment()
 	{
 	}
+
 	public virtual void CloseQuestParchment()
 	{
 	}
+
 	public virtual void IgniteFirePit(FirePit pit)
 	{
 	}
+
 	public virtual void FanFirePit(FirePit pit)
 	{
 	}
+
 	public virtual bool IsIgniting()
 	{
 		return false;
 	}
+
 	public virtual void SnapTo(Transform t)
 	{
 	}
+
 	public virtual void OnFirePitFullFlame()
 	{
 	}
+
 	public virtual void PickupFirePitTools()
 	{
 	}
+
 	public virtual void QuitMinigame()
 	{
 	}
+
 	public virtual bool IsPlayingMinigame()
 	{
 		return false;
 	}
+
 	public virtual void BlendToLocomotion()
 	{
 	}
+
 	public virtual bool HasBlacksmithTools()
 	{
 		return false;
 	}
+
 	protected virtual void SetAllowedToMove(bool allowedToMove)
 	{
 	}
+
 	protected virtual void SetAllowedToInteract(bool allowedToInteract)
 	{
 	}
+
 	public virtual bool IsSmithing()
 	{
 		return false;
 	}
+
 	public virtual void StartAimingSledgehammer()
 	{
 	}
+
 	public virtual bool IsInVehicleOutsideAvatar()
 	{
 		return true;
 	}
+
 	public virtual bool HasFightStick()
 	{
 		return false;
 	}
+
 	public virtual bool NeedsToPickup(QuestItem questItem)
 	{
 		return false;
 	}
+
 	public virtual void PassedCheckpoint(CheckpointId id)
 	{
 	}
+
 	public virtual bool IsWalkingToTarget()
 	{
 		return false;
@@ -193,6 +223,7 @@ public class IAvatar : MonoBehaviour
 	public void TryToPerformPrimaryAction(GameObject obj, Vector3 targetPosition, Quaternion targetRotation)
 	{
 		var action = ActionUtility.FindPrimaryAction(obj, this);
+
 		if (!action)
 		{
 			Debug.Log("No primary action found on:" + obj.name);
@@ -200,6 +231,7 @@ public class IAvatar : MonoBehaviour
 		}
 		TryToPerformAction(action, targetPosition, targetRotation);
 	}
+
 	public virtual void TryToPerformAction(Action interactable, Vector3 targetPosition, Quaternion targetRotation)
 	{
 	}
@@ -207,6 +239,7 @@ public class IAvatar : MonoBehaviour
 	public void PerformPrimaryAction(GameObject obj)
 	{
 		var action = ActionUtility.FindPrimaryAction(obj, this);
+
 		if (!action)
 		{
 			Debug.Log("No primary action found on:" + obj.name);
@@ -232,12 +265,11 @@ public class IAvatar : MonoBehaviour
 		return vehicle;
 	}
 
-
 	public virtual void ActionRequestDenied(ActionArbitration arbitrator)
 	{
 	}
+
 	public virtual void ActionRequestAccepted(ActionArbitration arbitrator)
 	{
 	}
 }
-

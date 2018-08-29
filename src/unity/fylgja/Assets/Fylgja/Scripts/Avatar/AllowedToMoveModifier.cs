@@ -5,10 +5,9 @@ public class AllowedToMoveModifier
 	{
 		debugName = _debugName;
 	}
-	
+
 	public override string ToString()
 	{
 		return debugName;
 	}
 }
-

@@ -21,4 +21,3 @@ public class Minimap : MonoBehaviour
 		transform.localEulerAngles = newRotation;
 	}
 }
-

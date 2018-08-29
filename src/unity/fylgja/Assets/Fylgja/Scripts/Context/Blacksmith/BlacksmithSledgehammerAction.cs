@@ -6,6 +6,7 @@ public class BlacksmithSledgehammerAction : ActionArbitration
 	public override bool IsActionPossible(IAvatar avatar)
 	{
 		var blacksmith = avatar.transform.root.gameObject.GetComponentInChildren<CharacterBlacksmith>();
+
 		return !blacksmith.IsAimingSledgehammer();
 	}
 

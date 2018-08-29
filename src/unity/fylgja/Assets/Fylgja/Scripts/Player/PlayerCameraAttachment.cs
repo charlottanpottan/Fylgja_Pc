@@ -5,4 +5,3 @@ public class PlayerCameraAttachment : MonoBehaviour
 {
 	public Transform cameraRoot;
 }
-

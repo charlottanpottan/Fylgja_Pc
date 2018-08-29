@@ -15,6 +15,7 @@ public class ActorShowQuestParchment : ActorSceneComponent
 	protected override void Act()
 	{
 		var avatarObject = actingInScene.GetActor(actorName);
+
 		characterQuestParchment = avatarObject.GetComponentInChildren<CharacterQuestParchment>();
 
 		avatarObject.BroadcastMessage("OnQuestParchmentOpen");

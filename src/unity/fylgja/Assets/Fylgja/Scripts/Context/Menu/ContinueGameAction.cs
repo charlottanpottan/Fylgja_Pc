@@ -11,7 +11,7 @@ public class ContinueGameAction : ActionArbitration
 
 	public override void ExecuteAction(IAvatar avatar)
 	{
-		if(clickAudio != null)
+		if (clickAudio != null)
 		{
 			DontDestroyOnLoad(audioHandler.CreateAndPlay(clickAudio, audioVolume));
 		}
@@ -19,6 +19,7 @@ public class ContinueGameAction : ActionArbitration
 		{
 			DontDestroyOnLoad(audioHandler.CreateAndPlay(audioVolume));
 		}
+
 		if (targetMenuManager.entryMenu)
 		{
 			playerLoader.ContinueGame();

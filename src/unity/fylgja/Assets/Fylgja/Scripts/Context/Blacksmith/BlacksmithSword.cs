@@ -25,7 +25,7 @@ public class BlacksmithSword : MonoBehaviour
 
 	void Update()
 	{
-		if( isPaused == false)
+		if (isPaused == false)
 		{
 			UpdateAnnealed();
 		}
@@ -35,6 +35,7 @@ public class BlacksmithSword : MonoBehaviour
 	{
 		normalizedAnnealedTemperature += normalizedAnnealedTemperatureChangePerSecond * Time.deltaTime;
 		normalizedAnnealedTemperature = Mathf.Clamp(normalizedAnnealedTemperature, 0.0f, 1.0f);
+
 		if (annealTimeLeft > 0)
 		{
 			normalizedAnnealedTemperature += normalizedAnnealedTemperatureHeatChangePerSecond * Time.deltaTime;
@@ -56,10 +57,10 @@ public class BlacksmithSword : MonoBehaviour
 
 		TriggerOnBlacksmithSwordAnnealedChanged(normalizedAnnealedTemperature);
 	}
-	
+
 	public void IsPaused(bool pauseState)
 	{
-		isPaused = pauseState;	
+		isPaused = pauseState;
 	}
 
 	public void AnnealSword()
@@ -89,6 +90,7 @@ public class BlacksmithSword : MonoBehaviour
 	public bool HitWithSledgeHammer(Vector3 hitLocation)
 	{
 		DebugUtilities.Assert(!swordIsCompleted, "You can not hit a sword that is completed!");
+
 		if (isAnnealed)
 		{
 			CheckForDentHit(hitLocation);
@@ -112,11 +114,12 @@ public class BlacksmithSword : MonoBehaviour
 		var dents = dentRoot.GetComponentsInChildren<BlacksmithSwordBump>();
 		foreach (BlacksmithSwordBump dent in dents)
 		{
-			if(!dent.IsBumpDone())
+			if (!dent.IsBumpDone())
 			{
 				Vector3 dentPosition = dent.transform.position;
 				dentPosition.y = 0;
 				float delta = (point - dentPosition).magnitude;
+
 				if (closestDent == null || delta < closestDelta)
 				{
 					closestDent = dent;
@@ -124,7 +127,6 @@ public class BlacksmithSword : MonoBehaviour
 				}
 			}
 		}
-
 
 		return closestDent;
 	}
@@ -138,6 +140,7 @@ public class BlacksmithSword : MonoBehaviour
 		delta.y = 0;
 
 		var missedBy = delta.magnitude;
+
 		if (missedBy > dentRadius)
 		{
 			TriggerOnSledgeHammerMissedDent();
@@ -179,4 +182,3 @@ public class BlacksmithSword : MonoBehaviour
 		BroadcastMessage("OnBlacksmithSwordAnnealedChanged", normalizedAnnealedTemperature);
 	}
 }
-

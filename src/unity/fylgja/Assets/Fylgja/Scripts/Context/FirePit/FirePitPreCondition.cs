@@ -26,6 +26,7 @@ public class FirePitPreCondition : ActionPreCondition
 		foreach (var transform in transforms)
 		{
 			float distance = (transform.position - position).magnitude;
+
 			if (distance < closestRange)
 			{
 				closestTransform = transform;
@@ -36,4 +37,3 @@ public class FirePitPreCondition : ActionPreCondition
 		return closestTransform;
 	}
 }
-

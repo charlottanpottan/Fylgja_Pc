@@ -38,7 +38,7 @@ public abstract class Vehicle : MonoBehaviour
 	public virtual void StopMoving()
 	{
 	}
-	
+
 	public virtual void SampleAnimation()
 	{
 	}
@@ -55,4 +55,3 @@ public abstract class Vehicle : MonoBehaviour
 		return controllingAvatar != null;
 	}
 }
-

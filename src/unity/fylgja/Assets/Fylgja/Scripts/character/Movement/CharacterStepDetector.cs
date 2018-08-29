@@ -5,7 +5,7 @@ public class CharacterStepDetector : MonoBehaviour
 {
 	float timer;
 	bool isInsideWater;
-	
+
 	bool isEnabled = true;
 
 	void Start()
@@ -14,7 +14,7 @@ public class CharacterStepDetector : MonoBehaviour
 
 	void Update()
 	{
-		if(isEnabled)
+		if (isEnabled)
 		{
 			timer -= Time.deltaTime;
 		}
@@ -29,7 +29,7 @@ public class CharacterStepDetector : MonoBehaviour
 	{
 		isInsideWater = false;
 	}
-	
+
 	public void IsEnabled (bool enableState)
 	{
 		isEnabled = enableState;
@@ -44,4 +44,3 @@ public class CharacterStepDetector : MonoBehaviour
 		}
 	}
 }
-

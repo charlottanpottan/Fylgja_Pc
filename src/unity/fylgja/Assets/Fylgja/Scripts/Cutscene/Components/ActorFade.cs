@@ -22,6 +22,4 @@ public class ActorFade : ActorSceneComponent
 		actingInScene.FadeInOut().FadeIn(fadeInTime);
 		ComponentDone();
 	}
-
 }
-

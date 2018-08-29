@@ -1,7 +1,5 @@
 using UnityEngine;
 
-
-
 public class StickFighterAi : MonoBehaviour
 {
 	public CharacterOpponentStickFight stickFightCharacter;
@@ -19,7 +17,8 @@ public class StickFighterAi : MonoBehaviour
 		{
 			return;
 		}
-		if (Time.time >= nextPunchAtTime && ( stickFightCharacter.GetState() == StickFighterState.BlockingEverything || stickFightCharacter.GetState() == StickFighterState.Blocking) )
+
+		if (Time.time >= nextPunchAtTime && (stickFightCharacter.GetState() == StickFighterState.BlockingEverything || stickFightCharacter.GetState() == StickFighterState.Blocking))
 		{
 			Punch();
 		}

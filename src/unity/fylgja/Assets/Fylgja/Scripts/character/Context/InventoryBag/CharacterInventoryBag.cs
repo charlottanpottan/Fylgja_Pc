@@ -10,10 +10,11 @@ public class CharacterInventoryBag : MonoBehaviour
 	private Camera inventoryCamera;
 
 	public delegate void NotifyOnClose(CharacterInventoryBag parchment);
+
 	public NotifyOnClose notifyOnClose;
 
 	InventoryBag instantiatedBag;
-	
+
 	void Start()
 	{
 		inventoryCamera = GameObject.FindGameObjectWithTag("InventoryCamera").GetComponent<Camera>();
@@ -43,6 +44,7 @@ public class CharacterInventoryBag : MonoBehaviour
 	{
 		Debug.Log("CharacterInventoryBag: OnInventoryBagClose");
 		playerInventoryBag.SetCanOpenBagState(true);
+
 		if (notifyOnClose != null)
 		{
 			notifyOnClose(this);

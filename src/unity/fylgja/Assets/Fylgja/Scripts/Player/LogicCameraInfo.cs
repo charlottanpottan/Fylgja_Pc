@@ -16,11 +16,11 @@ public struct LogicCameraInfo
 	public float pivotRotationY;
 	public bool pivotRotationIsDefined;
 	public float pivotDistance;
-	
+
 	public float fov;
 
 	public bool cameraSwitched;
-	
+
 	public Quaternion PivotRotation()
 	{
 		return Quaternion.Euler(new Vector3(pivotRotationX, pivotRotationY, 0.0f));
@@ -30,6 +30,7 @@ public struct LogicCameraInfo
 	{
 		const float closeToHeadDistance = 2.0f;
 		var closeToHeadFactor = 1.0f - (Mathf.Clamp(pivotDistance, 0, closeToHeadDistance) / closeToHeadDistance);
+
 		closeToHeadFactor *= closeToHeadFactor;
 		return targetPosition + (PivotRotation() * new Vector3(0, closeToHeadFactor * 0.9f, -pivotDistance));
 	}

@@ -44,15 +44,14 @@ public class PlayerQuestParchment : ActionArbitration
 	{
 		canOpenParchment = true;
 	}
-	
+
 	public void SetCanOpenParchmentState(bool state)
 	{
-		canOpenParchment = state;	
+		canOpenParchment = state;
 	}
-	
+
 	public override void ExecuteAction(IAvatar _avatar)
 	{
 		canOpenParchment = false;
 	}
 }
-

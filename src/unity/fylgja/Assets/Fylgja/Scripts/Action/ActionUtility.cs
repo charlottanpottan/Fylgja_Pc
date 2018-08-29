@@ -38,4 +38,3 @@ public class ActionUtility : MonoBehaviour
 		return possibleActions;
 	}
 }
-

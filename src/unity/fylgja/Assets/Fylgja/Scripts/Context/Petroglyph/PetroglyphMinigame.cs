@@ -31,7 +31,7 @@ public class PetroglyphMinigame : Minigame
 	{
 		Debug.Log("Closed minigame!");
 		CloseMinigame();
-		
+
 		avatar.transform.parent.BroadcastMessage("OnPetroglyphMinigameDone");
 		base.CompletedMinigame();
 
@@ -45,6 +45,4 @@ public class PetroglyphMinigame : Minigame
 		petroglyphCamera.gameObject.SetActiveRecursively(false);
 		mainCamera.tag = "MainCamera";
 	}
-
-
 }

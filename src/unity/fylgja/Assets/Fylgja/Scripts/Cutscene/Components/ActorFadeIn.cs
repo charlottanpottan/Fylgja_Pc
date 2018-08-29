@@ -13,7 +13,6 @@ public class ActorFadeIn : ActorSceneComponent
 
 	public override void Skip()
 	{
-
 	}
 
 	void OnFadeInDone()
@@ -22,4 +21,3 @@ public class ActorFadeIn : ActorSceneComponent
 		ComponentDone();
 	}
 }
-

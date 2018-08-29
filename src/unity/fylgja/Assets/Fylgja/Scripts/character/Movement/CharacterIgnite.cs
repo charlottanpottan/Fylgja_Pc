@@ -28,6 +28,7 @@ public class CharacterIgnite : MonoBehaviour
 		{
 			OnIgniteDone();
 		}
+
 		if (goingBackToIdle && Time.time >= goingBackToIdleDoneTime)
 		{
 			OnBackToIdleDone();
@@ -45,6 +46,7 @@ public class CharacterIgnite : MonoBehaviour
 	void OnFirePitIgnite(FirePit pit)
 	{
 		BroadcastMessage("OnFirePitIgnitionStart");
+
 		if (dontMoveModifier == null)
 		{
 			dontMoveModifier = new AllowedToMoveModifier("igniting");

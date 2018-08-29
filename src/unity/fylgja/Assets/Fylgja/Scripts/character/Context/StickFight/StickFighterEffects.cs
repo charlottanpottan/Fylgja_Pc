@@ -20,7 +20,6 @@ public class StickFighterEffects : MonoBehaviour
 	public float rightEnableStickAtTime;
 	public float rightDisableStickAtTime;
 
-
 	public GameObject blockLeft;
 	public GameObject blockRight;
 	public AudioHandler targetAudioHandler;
@@ -50,16 +49,19 @@ public class StickFighterEffects : MonoBehaviour
 			EnableStickEnd(leftStickEnd, true);
 			leftEnableAtTime = -1;
 		}
+
 		if (rightEnableAtTime > 0 && Time.time >= rightEnableAtTime)
 		{
 			EnableStickEnd(rightStickEnd, true);
 			rightEnableAtTime = -1;
 		}
+
 		if (leftDisableAtTime > 0 && Time.time >= leftDisableAtTime)
 		{
 			EnableStickEnd(leftStickEnd, false);
 			leftDisableAtTime = -1;
 		}
+
 		if (rightDisableAtTime > 0 && Time.time >= rightDisableAtTime)
 		{
 			EnableStickEnd(rightStickEnd, false);
@@ -77,6 +79,7 @@ public class StickFighterEffects : MonoBehaviour
 	{
 		Debug.Log("Effect: " + o.name);
 		Instantiate(o, effectTransform.position, effectTransform.rotation);
+
 		if (!targetAudioSource.isPlaying && hitLanded && !lastHit)
 		{
 			targetAudioHandler.TriggerSound();
@@ -103,6 +106,7 @@ public class StickFighterEffects : MonoBehaviour
 		for (int i = 0; i < stars.Length; ++i)
 		{
 			bool enableStar = (numberOfStars > i);
+
 			if (i == 0 && enableStar)
 			{
 				foreach (var otherObject in enableObjectsOnFirstStar)

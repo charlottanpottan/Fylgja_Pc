@@ -9,28 +9,25 @@ public class Clothes
 	public Mesh clothesMesh;
 }
 
-public class CharacterChangeClothes : MonoBehaviour {
-	
+public class CharacterChangeClothes : MonoBehaviour
+{
 	public SkinnedMeshRenderer targetRenderer;
 	public Clothes[] clothes;
-	
+
 	void Start()
 	{
 		ChangeClothes(Application.loadedLevelName);
 	}
-	
+
 	void ChangeClothes(string targetClothes)
 	{
-		foreach(Clothes c in clothes)
+		foreach (Clothes c in clothes)
 		{
-			if(c.clothesName == targetClothes)
+			if (c.clothesName == targetClothes)
 			{
 				targetRenderer.materials = c.clothesMaterials;
 				targetRenderer.sharedMesh = c.clothesMesh;
 			}
 		}
 	}
-	
-	
-	
 }

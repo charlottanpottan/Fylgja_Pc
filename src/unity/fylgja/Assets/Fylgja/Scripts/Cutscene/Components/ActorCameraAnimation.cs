@@ -37,7 +37,6 @@ public class ActorCameraAnimation : ActorSceneComponent
 
 		isActing = true;
 	}
-	
 
 	public override void Skip()
 	{
@@ -97,4 +96,3 @@ public class ActorCameraAnimation : ActorSceneComponent
 		Close();
 	}
 }
-

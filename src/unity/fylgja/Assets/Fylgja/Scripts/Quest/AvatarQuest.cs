@@ -28,6 +28,7 @@ public class AvatarQuest : MonoBehaviour
 		var instantiatedCutscene = ActorSceneUtility.CreateSceneWithAvatar(scene.gameObject, GetComponent<IAvatar>());
 
 		var instantiatedQuestObject = instantiatedCutscene as Quest;
+
 		if (instantiatedQuestObject != null)
 		{
 			ReceiveQuest(instantiatedQuestObject);
@@ -39,6 +40,7 @@ public class AvatarQuest : MonoBehaviour
 	public ActorScene FetchQuest(string name)
 	{
 		var questObject = GameObject.Find(name + "(Clone)");
+
 		if (questObject == null)
 		{
 			return null;
@@ -48,7 +50,6 @@ public class AvatarQuest : MonoBehaviour
 
 		return actorScene;
 	}
-
 
 	void ReceiveQuest(Quest quest)
 	{
@@ -100,10 +101,10 @@ public class AvatarQuest : MonoBehaviour
 		return questProgress.questPart;
 	}
 
-
 	private void OnFailedQuest(ActorScene failedScene)
 	{
 		var failedQuest = failedScene as Quest;
+
 		Debug.Log("Sorry, you failed quest '" + failedScene.name + "'. You have to start all over again.");
 		SendMessage("OnQuestClosed", failedQuest.questName);
 		progressForQuests.Remove(failedQuest.questName);
@@ -112,6 +113,7 @@ public class AvatarQuest : MonoBehaviour
 	private void OnCompletedQuest(ActorScene scene)
 	{
 		var completedQuest = scene as Quest;
+
 		Debug.Log("Yeahoo: You completed quest:" + completedQuest.name);
 
 		completedQuest.endOfSceneNotification -= OnCompletedQuest;
@@ -129,6 +131,7 @@ public class AvatarQuest : MonoBehaviour
 	public ICollection<string> StartedQuests()
 	{
 		var startedQuests = new List<string>();
+
 		foreach (var questProgressPair in progressForQuests)
 		{
 			startedQuests.Add(questProgressPair.Key);
@@ -143,6 +146,7 @@ public class AvatarQuest : MonoBehaviour
 		foreach (var questProgressPair in progressForQuests)
 		{
 			var component = questProgressPair.Value.quest.ActingComponent();
+
 			if (component == null)
 			{
 				continue;
@@ -157,6 +161,7 @@ public class AvatarQuest : MonoBehaviour
 		foreach (var questProgressPair in progressForQuests)
 		{
 			var component = questProgressPair.Value.quest.ActingComponent();
+
 			if (component == null)
 			{
 				continue;
@@ -171,6 +176,7 @@ public class AvatarQuest : MonoBehaviour
 		foreach (var questProgressPair in progressForQuests)
 		{
 			var component = questProgressPair.Value.quest.ActingComponent();
+
 			if (component == null)
 			{
 				continue;
@@ -178,7 +184,6 @@ public class AvatarQuest : MonoBehaviour
 			component.SendMessage("OnInventoryAdd", itemName, SendMessageOptions.DontRequireReceiver);
 		}
 	}
-
 
 	public ICollection<string> InteractableTypesToLookFor()
 	{
@@ -194,7 +199,7 @@ public class AvatarQuest : MonoBehaviour
 	{
 		return IsLookingFor(npc.name) || goalObjects.Contains(npc.gameObject);
 	}
-	
+
 	public bool IsLookingFor(VehicleEnterArbitration vehicle)
 	{
 		return IsLookingFor(vehicle.name) || goalObjects.Contains(vehicle.gameObject);

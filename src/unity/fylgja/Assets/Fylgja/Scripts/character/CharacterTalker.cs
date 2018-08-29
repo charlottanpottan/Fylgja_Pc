@@ -1,8 +1,5 @@
 using UnityEngine;
 
-
-
-
 public class CharacterTalker : MonoBehaviour
 {
 	public Transform faceRoot;

@@ -12,7 +12,6 @@ public class PlayerCameraCollision : LogicCamera
 	bool overridingPivotDistance = false;
 	bool lerpingPivotOut = false;
 
-
 	void Update()
 	{
 	}
@@ -32,7 +31,6 @@ public class PlayerCameraCollision : LogicCamera
 			lerpingPivotOut = false;
 			overridingPivotDistance = false;
 		}
-
 
 		if (collidedBack)
 		{
@@ -67,14 +65,15 @@ public class PlayerCameraCollision : LogicCamera
 			}
 		}
 
-
 		if (lerpingPivotOut)
 		{
 			currentPivotDistanceOverride = Mathf.Lerp(currentPivotDistanceOverride, targetPivotDistance, Time.deltaTime * moveOutLerpSpeed);
 			info.pivotDistance = currentPivotDistanceOverride;
+
 			if (Mathf.Abs(currentPivotDistanceOverride - targetPivotDistance) < 0.0005f)
 			{
 				lerpingPivotOut = false;
+
 				if (!collidedBack)
 				{
 					overridingPivotDistance = false;
@@ -83,7 +82,7 @@ public class PlayerCameraCollision : LogicCamera
 			}
 		}
 	}
-	
+
 	public override void SetCameraPivot(ref LogicCameraInfo cameraInfo, Vector2 targetPivot)
 	{
 	}

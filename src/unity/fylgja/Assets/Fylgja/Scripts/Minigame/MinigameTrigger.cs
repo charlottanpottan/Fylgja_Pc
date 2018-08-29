@@ -17,10 +17,10 @@ public class MinigameTrigger : MonoBehaviour
 	{
 		Debug.Log("Someone got into the minigame trigger");
 		var avatar = other.gameObject.GetComponentInChildren(typeof(CharacterAvatar)) as CharacterAvatar;
+
 		if (avatar != null)
 		{
 			minigame.StartMinigame(avatar);
 		}
 	}
 }
-

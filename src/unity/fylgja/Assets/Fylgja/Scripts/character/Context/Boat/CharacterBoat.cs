@@ -55,6 +55,7 @@ public class CharacterBoat : MonoBehaviour
 		}
 
 		Vector3 forceOrientation = boatToControl.BoatForceDirection();
+
 		if (forceOrientation.z < -0.2f)
 		{
 			PaddleBackward();
@@ -143,4 +144,3 @@ public class CharacterBoat : MonoBehaviour
 		boatToControl.SetPaddleInWater(false);
 	}
 }
-

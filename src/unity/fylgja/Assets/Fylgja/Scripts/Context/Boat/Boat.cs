@@ -60,7 +60,7 @@ public class Boat : Vehicle
 		forceOrientation = AvatarInput(requestedRotation);
 		isMoving = true;
 	}
-	
+
 	void Update()
 	{
 		if (!paddleIsInWater)

@@ -25,9 +25,10 @@ public class CharacterStepEffects : MonoBehaviour
 		{
 			waterSounds.TriggerSound();
 			RaycastHit hit;
-			if(Physics.Raycast(transform.root.position + Vector3.up * 5f, -Vector3.up, out hit, 10f, mask))
+
+			if (Physics.Raycast(transform.root.position + Vector3.up * 5f, -Vector3.up, out hit, 10f, mask))
 			{
-				if(hit.collider.gameObject.layer == effectLayer)
+				if (hit.collider.gameObject.layer == effectLayer)
 				{
 					Instantiate(waterEffect, hit.point, Quaternion.identity);
 				}
@@ -39,4 +40,3 @@ public class CharacterStepEffects : MonoBehaviour
 		}
 	}
 }
-

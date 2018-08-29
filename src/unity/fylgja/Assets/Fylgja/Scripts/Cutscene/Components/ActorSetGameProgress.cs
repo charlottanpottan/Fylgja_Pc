@@ -18,6 +18,7 @@ public class ActorSetGameProgress : ActorSceneComponent
 		var storage = avatar.player.playerStorage;
 
 		storage.SetStartCheckpoint(new CheckpointId(checkpointId));
+
 		if (quest != null)
 		{
 			storage.AddStartedQuest(quest.questName);
@@ -31,7 +32,5 @@ public class ActorSetGameProgress : ActorSceneComponent
 
 	public override void Skip()
 	{
-
 	}
 }
-

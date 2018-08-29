@@ -12,7 +12,7 @@ public class CharacterFan : MonoBehaviour
 
 	public AnimationClip fanStart;
 	public AnimationClip fanStop;
-	
+
 	public GameObject barObject;
 
 	public AudioHandler firePitDoneDialog;
@@ -39,7 +39,7 @@ public class CharacterFan : MonoBehaviour
 	float fanReadyTime;
 
 	bool waitingForFanReachedEnd;
-	
+
 	Animation barAnim;
 
 	float waitingForPitDoneTime;
@@ -58,6 +58,7 @@ public class CharacterFan : MonoBehaviour
 		if (waitForFirePitDone)
 		{
 			Debug.Log("Waiting for animation....");
+
 			if (!GetComponent<Animation>().IsPlaying(firePitDone.name))
 			{
 				OnFirePitMinigameDoneAnimationReady();
@@ -67,17 +68,24 @@ public class CharacterFan : MonoBehaviour
 		{
 			OnFanReady();
 		}
+
 		if (isInFanMode && waitingForFanReachedEnd)
 		{
 			float fanTime = Mathf.Clamp(fanAnimationState.normalizedTime, 0, 1.0f);
+
 			if (fanTime == 1.0f)
 			{
 				//OnFanReachedEnd();
 			}
-			if(fanDirectionIsUp)
+
+			if (fanDirectionIsUp)
+			{
 				barAnim[barAnim.clip.name].normalizedTime = fanTime;
+			}
 			else
-				barAnim[barAnim.clip.name].normalizedTime = 1-fanTime;
+			{
+				barAnim[barAnim.clip.name].normalizedTime = 1 - fanTime;
+			}
 		}
 
 		if (waitingForPitDone && Time.time >= waitingForPitDoneTime)
@@ -94,7 +102,6 @@ public class CharacterFan : MonoBehaviour
 	{
 	}
 
-	
 	void OnFirePitIgnitionStart()
 	{
 		if (isInFanMode)
@@ -102,7 +109,7 @@ public class CharacterFan : MonoBehaviour
 			StopFanningMode();
 		}
 	}
-	
+
 	void OnFirePitIgnitionDone()
 	{
 		StartFanMode();
@@ -111,6 +118,7 @@ public class CharacterFan : MonoBehaviour
 	void StartFanMode()
 	{
 		Debug.Log("CrossFade: StartFanMode!");
+
 		if (dontMoveModifier == null)
 		{
 			dontMoveModifier = new AllowedToMoveModifier("fanning");
@@ -136,7 +144,6 @@ public class CharacterFan : MonoBehaviour
 	{
 		return waitingForFanReady;
 	}
-
 
 	AnimationState StartAnimationAt(Animation anim, AnimationClip clip, float time)
 	{
@@ -172,7 +179,6 @@ public class CharacterFan : MonoBehaviour
 		isFanning = false;
 	}
 
-
 	void OnFanRequested(FirePit pit)
 	{
 		if (!isInFanMode)
@@ -186,6 +192,7 @@ public class CharacterFan : MonoBehaviour
 
 		float fanTime = Mathf.Clamp(fanAnimationState.normalizedTime, 0, 1.0f);
 		int fanPower = 0;
+
 		if (isFanning)
 		{
 			if (fanTime < lessThanFailThreshold)
@@ -231,6 +238,7 @@ public class CharacterFan : MonoBehaviour
 			StartAnimationAt(fanDown, birchDown, 1.0f - fanTime);
 		} waitingForFanReachedEnd = true;
 		lastUsedPit = pit;
+
 		if (fanPower != 0)
 		{
 			pit.Fan(fanPower);
@@ -254,7 +262,7 @@ public class CharacterFan : MonoBehaviour
 		GetComponent<Animation>().CrossFade(firePitDone.name);
 		waitingForFanReachedEnd = false;
 		lastUsedPit = null;
- 		waitingForPitDone = true;
+		waitingForPitDone = true;
 		waitingForPitDoneTime = Time.time + firePitDone.length;
 	}
 
@@ -271,13 +279,13 @@ public class CharacterFan : MonoBehaviour
 		BroadcastMessage("OnFirePitMinigameComplete");
 		waitForFirePitDone = false;
 	}
-	
-	
+
 	void StopFanningMode()
 	{
 		Debug.Log("Fanning: Stop");
 		DebugUtilities.Assert(isInFanMode, "You can not reset if you aren't fanning");
-		if(barAnim != null)
+
+		if (barAnim != null)
 		{
 			Destroy(barAnim.gameObject);
 			barAnim = null;
@@ -289,6 +297,7 @@ public class CharacterFan : MonoBehaviour
 	void Reset()
 	{
 		Debug.Log("Fanning: Reset");
+
 		if (isInFanMode)
 		{
 			StopFanningMode();

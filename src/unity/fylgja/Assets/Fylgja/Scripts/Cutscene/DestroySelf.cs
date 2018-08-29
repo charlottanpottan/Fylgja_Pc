@@ -1,10 +1,10 @@
 using UnityEngine;
 using System.Collections;
 
-public class DestroySelf : MonoBehaviour {
-
+public class DestroySelf : MonoBehaviour
+{
 	void Do()
 	{
-		Destroy(gameObject);	
+		Destroy(gameObject);
 	}
 }

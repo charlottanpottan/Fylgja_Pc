@@ -36,7 +36,6 @@ public class AudioHandler : MonoBehaviour
 		GetComponent<AudioSource>().Play();
 	}
 
-
 	public void TriggerSoundFromPosition(Vector3 position)
 	{
 		transform.position = position;
@@ -47,27 +46,30 @@ public class AudioHandler : MonoBehaviour
 	{
 		GetComponent<AudioSource>().Stop();
 	}
-	
-	public AudioSource CreateAndPlay(float volume) {
-        GameObject go = new GameObject("One shot audio");
-        AudioSource source = go.AddComponent<AudioSource>();
-		source.bypassEffects = true;
-        source.clip = PickSound();
-        source.volume = volume;
-        source.Play();
-        Destroy(go, source.clip.length);
-        return source;
-    }
-	
-	public AudioSource CreateAndPlay(AudioClip clip, float volume) {
-        GameObject go = new GameObject("One shot audio");
-        AudioSource source = go.AddComponent<AudioSource>();
-		source.bypassEffects = true;
-        source.clip = clip;
-        source.volume = volume;
-        source.Play();
-        Destroy(go, clip.length);
-        return source;
-    }
-}
 
+	public AudioSource CreateAndPlay(float volume)
+	{
+		GameObject go = new GameObject("One shot audio");
+		AudioSource source = go.AddComponent<AudioSource>();
+
+		source.bypassEffects = true;
+		source.clip = PickSound();
+		source.volume = volume;
+		source.Play();
+		Destroy(go, source.clip.length);
+		return source;
+	}
+
+	public AudioSource CreateAndPlay(AudioClip clip, float volume)
+	{
+		GameObject go = new GameObject("One shot audio");
+		AudioSource source = go.AddComponent<AudioSource>();
+
+		source.bypassEffects = true;
+		source.clip = clip;
+		source.volume = volume;
+		source.Play();
+		Destroy(go, clip.length);
+		return source;
+	}
+}

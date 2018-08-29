@@ -22,10 +22,12 @@ public class SceneActor : MonoBehaviour
 		{
 			GetComponent<Animation>()[mouthMovement.name].layer = 3;
 		}
+
 		if (randomGesture)
 		{
 			GetComponent<Animation>()[randomGesture.name].layer = 2;
 		}
+
 		if (idleAnimation)
 		{
 			GetComponent<Animation>()[idleAnimation.name].layer = 1;
@@ -47,6 +49,7 @@ public class SceneActor : MonoBehaviour
 		StopIdleAnimation();
 		GetComponent<Animation>()[clip.name].layer = 2;
 		customAnimationName = clip.name;
+
 		if (customAnimationCrossfadeTime > 0)
 		{
 			GetComponent<Animation>().CrossFade(clip.name, customAnimationCrossfadeTime);
@@ -61,17 +64,18 @@ public class SceneActor : MonoBehaviour
 	{
 		isInScene = true;
 		var avatar = GetComponentInChildren<CharacterAvatar>();
+
 		if (avatar != null)
 		{
 			avatar.TurnOffLocomotion();
 		}
 		StartIdleAnimation();
-
 	}
 
 	public void ActorSceneExit()
 	{
 		isInScene = false;
+
 		if (customAnimationName != null)
 		{
 			GetComponent<Animation>().Stop(customAnimationName);
@@ -79,6 +83,7 @@ public class SceneActor : MonoBehaviour
 		}
 		StopIdleAnimation();
 		var avatar = GetComponentInChildren<CharacterAvatar>();
+
 		if (avatar != null)
 		{
 			avatar.BlendToLocomotion();
@@ -109,14 +114,18 @@ public class SceneActor : MonoBehaviour
 
 	public void StartFacialAnimation()
 	{
-		if(mouthMovement != null)
+		if (mouthMovement != null)
+		{
 			GetComponent<Animation>().CrossFade(mouthMovement.name);
+		}
 	}
 
 	public void StopFacialAnimation()
 	{
-		if(mouthMovement != null)
+		if (mouthMovement != null)
+		{
 			GetComponent<Animation>().Stop(mouthMovement.name);
+		}
 	}
 
 	public void RandomGesture()

@@ -23,7 +23,6 @@ public class MinimapSurface : MonoBehaviour
 	{
 	}
 
-
 	public List<Interactable> InteractablesShownOnMap()
 	{
 		var interactables = new List<Interactable>();
@@ -31,7 +30,9 @@ public class MinimapSurface : MonoBehaviour
 		foreach (var iconPair in icons)
 		{
 			var o = iconPair.Key;
-			if (o == null) {
+
+			if (o == null)
+			{
 				continue;
 			}
 			interactables.Add(o.GetComponentInChildren<Interactable>());
@@ -42,6 +43,7 @@ public class MinimapSurface : MonoBehaviour
 	void LateUpdate()
 	{
 		RemoveUninterestingObjects();
+
 		if (!avatarToFollow)
 		{
 			return;
@@ -63,6 +65,7 @@ public class MinimapSurface : MonoBehaviour
 		rotatedDelta *= deltaFactor;
 
 		var radius = rotatedDelta.magnitude;
+
 		if (radius > minimapBorderRadius)
 		{
 			rotatedDelta.Normalize();
@@ -99,6 +102,7 @@ public class MinimapSurface : MonoBehaviour
 		{
 			var interactableComponent = collider.gameObject.GetComponentInChildren<Interactable>();
 			DebugUtilities.Assert(interactableComponent != null, "You have an object that is layer interactable but is missing a interactable component:" + collider.gameObject.name);
+
 			if (!interactableTypeNames.Contains(interactableComponent.name))
 			{
 				continue;
@@ -140,6 +144,7 @@ public class MinimapSurface : MonoBehaviour
 		foreach (var iconPair in icons)
 		{
 			var icon = iconPair.Value;
+
 			if (icon.targetObject == null || !IsInteresting(icon.targetObject))
 			{
 				iconsToRemove.Add(icon);

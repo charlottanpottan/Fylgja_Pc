@@ -22,12 +22,14 @@ public class TriggerLowPass : MonoBehaviour
 			AssignTargetFilters(other.gameObject);
 		}
 		iTween.Stop(gameObject);
+
 		if (fadeLowPass && targetLowPassFilter != null)
 		{
 			targetLowPassFilter.cutoffFrequency = lowPassStartValue;
 			targetLowPassFilter.enabled = true;
 			iTween.ValueTo(gameObject, iTween.Hash("from", lowPassStartValue, "to", lowPassTargetValue, "time", lowPassFadeTime, "onupdatetarget", gameObject, "onupdate", "FadeLowPass", "easetype", easeType));
 		}
+
 		if (fadeHighPass && targetHighPassFilter != null)
 		{
 			targetHighPassFilter.cutoffFrequency = highPassStartValue;
@@ -47,6 +49,7 @@ public class TriggerLowPass : MonoBehaviour
 		{
 			iTween.ValueTo(gameObject, iTween.Hash("from", lowPassTargetValue, "to", lowPassStartValue, "time", lowPassFadeTime, "onupdatetarget", gameObject, "onupdate", "FadeLowPass", "oncompletetarget", gameObject, "oncomplete", "DeactivateLowPassFilter", "easetype", easeType));
 		}
+
 		if (fadeHighPass)
 		{
 			iTween.ValueTo(gameObject, iTween.Hash("from", highPassTargetValue, "to", highPassStartValue, "time", highPassFadeTime, "onupdatetarget", gameObject, "onupdate", "FadeHighPass", "oncompletetarget", gameObject, "oncomplete", "DeactivateHighPassFilter", "easetype", easeType));
@@ -65,6 +68,7 @@ public class TriggerLowPass : MonoBehaviour
 		{
 			targetLowPassFilter = filters.targetLowPassFilter;
 		}
+
 		if (targetHighPassFilter == null)
 		{
 			targetHighPassFilter = filters.targetHighPassFilter;

@@ -10,9 +10,8 @@ public class LogicCameraFromGameObject : LogicCamera
 		cameraInfo.useTargetPosition = true;
 		cameraInfo.targetPosition = cameraInfo.sourcePosition + transform.rotation * new Vector3(0, 0, 1);
 	}
-	
+
 	public override void SetCameraPivot(ref LogicCameraInfo cameraInfo, Vector2 targetPivot)
 	{
-		
 	}
 }

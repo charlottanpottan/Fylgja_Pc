@@ -42,12 +42,12 @@ public class AvatarToPlayerNotifications : MonoBehaviour
 	{
 		player.playerInteraction.OnSubtitleStart(text);
 	}
-	
+
 	public void OnSubtitleStop()
 	{
 		player.playerInteraction.OnSubtitleStop();
 	}
-	
+
 	public void OnAssignedVehicle(Vehicle vehicle)
 	{
 		player.playerInteraction.OnAssignedVehicle(vehicle);
@@ -78,12 +78,10 @@ public class AvatarToPlayerNotifications : MonoBehaviour
 		}
 	}
 
-
 	public void OnStartedQuest(string questName)
 	{
 		player.playerStorage.AddStartedQuest(questName);
 	}
-
 
 	public void OnQuestCompleted(string questName)
 	{

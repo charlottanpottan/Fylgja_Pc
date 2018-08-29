@@ -20,10 +20,9 @@ public class FirePit : ActionArbitration
 		StrengthChanged();
 		enabled = false;
 	}
-	
+
 	void Awake()
 	{
-		
 	}
 
 	void Update()
@@ -44,6 +43,7 @@ public class FirePit : ActionArbitration
 		if (debug)
 		{
 			health += debugHealthChangeEachSecond;
+
 			if (health > maxHealth)
 			{
 				health = maxHealth;
@@ -83,6 +83,7 @@ public class FirePit : ActionArbitration
 		{
 			health = maxHealth;
 			Debug.Log("We have FULL FLAME!");
+
 			if (firePitNotification != null)
 			{
 				Debug.Log("Reporting full flame to minigame");
@@ -148,12 +149,14 @@ public class FirePit : ActionArbitration
 	public override bool IsActionPossible(IAvatar avatar)
 	{
 		var igniter = avatar.GetComponentInChildren<CharacterFirePitMinigame>();
+
 		return !IsFullFlame() && !IsIgniting() && igniter.HasFirePitTools();
 	}
 
 	public override void ExecuteAction(IAvatar avatar)
 	{
 		var igniter = avatar.GetComponentInChildren<CharacterFirePitMinigame>();
+
 		if (!IsIgniting() && igniter.HasFirePitTools())
 		{
 			if (IsDead())
@@ -174,6 +177,7 @@ public class FirePit : ActionArbitration
 		DebugUtilities.Assert(addedHealth >= 0 && addedHealth <= 10, "You can not add that amount to health");
 		health += addedHealth;
 		health = Mathf.Min(maxHealth, health);
+
 		if (addedHealth < 4)
 		{
 			BroadcastMessage("OnFirePitFanFailed");
@@ -192,10 +196,10 @@ public class FirePit : ActionArbitration
 	{
 		enabled = false;
 	}
-	
+
 	public void ResetFire()
 	{
-		health = 0;	
+		health = 0;
 		BroadcastMessage("ResetEffects");
 		enabled = true;
 	}

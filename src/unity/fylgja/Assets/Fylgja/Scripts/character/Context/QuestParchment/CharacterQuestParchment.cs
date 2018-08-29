@@ -9,8 +9,9 @@ public class CharacterQuestParchment : MonoBehaviour
 	private Camera parchmentCamera;
 	public AvatarQuest avatarQuest;
 	public delegate void NotifyOnClose(CharacterQuestParchment parchment);
+
 	public NotifyOnClose notifyOnClose;
-	
+
 	void Start()
 	{
 		transformToSpawnParchement = GameObject.FindGameObjectWithTag("QuestParchmentLocator").transform;
@@ -44,6 +45,7 @@ public class CharacterQuestParchment : MonoBehaviour
 		Debug.Log("CharacterQuestParchment detected close");
 		transformToSpawnParchement.BroadcastMessage("OnQuestParchmentClose", SendMessageOptions.DontRequireReceiver);
 		playerQuestParchment.SetCanOpenParchmentState(true);
+
 		if (notifyOnClose != null)
 		{
 			notifyOnClose(this);

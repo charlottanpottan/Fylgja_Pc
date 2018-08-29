@@ -5,7 +5,6 @@ public class PlayerLevelLoader : MonoBehaviour
 {
 	public PlayerStorage playerStorage;
 
-
 	public void NewGame()
 	{
 		playerStorage.NewGame();

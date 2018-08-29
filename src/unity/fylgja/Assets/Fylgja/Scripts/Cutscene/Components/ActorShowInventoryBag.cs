@@ -14,6 +14,7 @@ public class ActorShowInventoryBag : ActorSceneComponent
 	protected override void Act()
 	{
 		var avatarObject = actingInScene.GetActor(actorName);
+
 		characterInventoryBag = avatarObject.GetComponentInChildren<CharacterInventoryBag>();
 
 		avatarObject.BroadcastMessage("OnInventoryBagOpen");
@@ -28,6 +29,7 @@ public class ActorShowInventoryBag : ActorSceneComponent
 	public override void Skip()
 	{
 		var avatar = actingInScene.GetMainAvatar();
+
 		Debug.Log("ActorShowInventoryBag: CLOSE");
 		characterInventoryBag.Close(avatar);
 		ComponentDone();
@@ -38,4 +40,3 @@ public class ActorShowInventoryBag : ActorSceneComponent
 		ComponentDone();
 	}
 }
-

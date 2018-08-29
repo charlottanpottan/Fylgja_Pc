@@ -11,7 +11,6 @@ public class CameraUtility
 		return optimalDistance;
 	}
 
-
 	public static float CalculateFactor(Camera cameraToUse)
 	{
 		var fov = cameraToUse.fieldOfView * Mathf.PI / 180.0f;

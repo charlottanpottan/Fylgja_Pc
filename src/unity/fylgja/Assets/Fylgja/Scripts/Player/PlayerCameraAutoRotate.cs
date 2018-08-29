@@ -17,7 +17,6 @@ public class PlayerCameraAutoRotate : LogicCamera
 //		info.pivotRotationY = Mathf.LerpAngle(info.pivotRotationY, info.targetRotation.eulerAngles.y, Time.deltaTime * rotateSpeedFactor * factor);
 //	}
 
-
 	//Linus variant för att ge en smidigare övergång från muskontroll till autorotation
 	public override void UpdateCamera(ref LogicCameraInfo info)
 	{
@@ -29,12 +28,12 @@ public class PlayerCameraAutoRotate : LogicCamera
 		}
 		rotationX = info.pivotRotationX;
 
-
 		if (info.pivotRotationIsDefined)
 		{
 			currentRotationTimer = Time.time + rotateResetTime;
 			return;
 		}
+
 		if (Time.time < currentRotationTimer)
 		{
 			return;
@@ -42,6 +41,7 @@ public class PlayerCameraAutoRotate : LogicCamera
 		float factor = Mathf.Max(info.targetMovementFactor - 0.5f, 0) * 2.0f;
 		info.pivotRotationY = Mathf.LerpAngle(info.pivotRotationY, info.targetRotation.eulerAngles.y, Time.deltaTime * rotateSpeedFactor * factor);
 	}
+
 	public override void SetCameraPivot(ref LogicCameraInfo cameraInfo, Vector2 targetPivot)
 	{
 	}

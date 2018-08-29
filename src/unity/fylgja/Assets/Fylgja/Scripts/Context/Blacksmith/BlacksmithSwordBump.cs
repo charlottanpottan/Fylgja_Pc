@@ -39,8 +39,8 @@ public class BlacksmithSwordBump : MonoBehaviour
 		var anim = animationOnSword;
 
 		AnimationState state = anim[bumpAnimation.name];
-		
-		if(health < 0.1f)
+
+		if (health < 0.1f)
 		{
 			state.layer = bumpLayer;
 			state.normalizedTime = 0;

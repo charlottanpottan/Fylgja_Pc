@@ -177,6 +177,7 @@ public class CharacterAvatar : IAvatar
 	{
 		// transform.parent.BroadcastMessage("OnPassedCheckpoint", id);
 		Debug.Log("Passed checkpoint:" + id.CheckpointIdValue());
+
 		if (playerNotifications)
 		{
 			Debug.Log("Notifying Player about checkpoint");
@@ -237,8 +238,9 @@ public class CharacterAvatar : IAvatar
 		Vector3 targetPosition = new Vector3(targetInteractPosition.x, 0, targetInteractPosition.z);
 		Vector3 avatarPosition = new Vector3(characterWalking.transform.position.x, 0, characterWalking.transform.position.z);
 		float distanceToInteractionPoint = (targetPosition - avatarPosition).magnitude;
-		
+
 		float deltaY = Mathf.Abs(Angle.AngleDiff(targetInteractRotation.eulerAngles.y, characterWalking.transform.eulerAngles.y));
+
 //		Debug.Log("RotationDiff:" + deltaY + " target:" + targetInteractRotation.eulerAngles.y + " source:" + characterWalking.transform.eulerAngles.y);
 		if (deltaY > 5)
 		{
@@ -269,7 +271,6 @@ public class CharacterAvatar : IAvatar
 		transform.rotation = preConditionTransform.rotation;
 	}
 
-
 	public override void TryToPerformAction(Action action, Vector3 targetPosition, Quaternion targetRotation)
 	{
 		if (action.preCondition != null && !action.preCondition.AvatarCanWalkToAction(this))
@@ -291,7 +292,7 @@ public class CharacterAvatar : IAvatar
 				targetInteractPosition = walkToTransform.position;
 				targetInteractRotation = walkToTransform.rotation;
 			}
-			
+
 			if (CloseEnoughToPerformAction())
 			{
 				PerformAction(action);

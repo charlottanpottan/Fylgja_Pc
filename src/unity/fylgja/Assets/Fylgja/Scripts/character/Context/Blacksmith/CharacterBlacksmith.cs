@@ -105,8 +105,9 @@ public class CharacterBlacksmith : MonoBehaviour
 		Debug.Log("Picking up a new sword");
 		var scene = ActorSceneUtility.CreateSceneWithAvatar(pickupSwordScene.gameObject, characterAvatar);
 		scene.endOfSceneNotification += OnPickupSwordSceneEnded;
+
 //		swordNotifications.PauseTimer();
-		if(sword != null)
+		if (sword != null)
 		{
 			sword.IsPaused(true);
 		}
@@ -117,8 +118,9 @@ public class CharacterBlacksmith : MonoBehaviour
 	{
 		Debug.Log("Pickup Sword scene ended!");
 		scene.endOfSceneNotification -= OnPickupSwordSceneEnded;
+
 //		swordNotifications.ResumeTimer();
-		if(sword != null)
+		if (sword != null)
 		{
 			sword.IsPaused(false);
 		}
@@ -129,8 +131,9 @@ public class CharacterBlacksmith : MonoBehaviour
 		Debug.Log("Sword reported as done");
 		var scene = ActorSceneUtility.CreateSceneWithAvatarAndInteractable(swordDoneScenes[finishedSwordCount].gameObject, characterAvatar, sword.gameObject);
 		scene.endOfSceneNotification += OnSwordDoneSceneEnded;
+
 //		swordNotifications.PauseTimer();
-		if(sword != null)
+		if (sword != null)
 		{
 			sword.IsPaused(true);
 		}
@@ -143,6 +146,7 @@ public class CharacterBlacksmith : MonoBehaviour
 		Debug.Log("OnSwordDoneScene ended...");
 		scene.endOfSceneNotification -= OnSwordDoneSceneEnded;
 		var gameIsComplete = swordNotifications.OnSwordDone(sword);
+
 		if (!gameIsComplete)
 		{
 			PickupSword();
@@ -161,7 +165,6 @@ public class CharacterBlacksmith : MonoBehaviour
 		isInSledgehammerMode = false;
 		punchIsPossible = false;
 	}
-
 
 	void BlacksmithAnnealSword()
 	{
@@ -184,12 +187,14 @@ public class CharacterBlacksmith : MonoBehaviour
 			if (punchIsPossible)
 			{
 				waitingForSwordStop = false;
+
 				if (!swordIsMoving)
 				{
 					sword.BroadcastMessage("OnSwordMovementStarted");
 					swordIsMoving = true;
 				}
 				float newSwordDirection = Mathf.Sign(deltaMovement);
+
 				if (newSwordDirection != currentSwordDirection)
 				{
 					sword.BroadcastMessage("OnSwordChangedMoveDirection");
@@ -220,6 +225,7 @@ public class CharacterBlacksmith : MonoBehaviour
 	void StartIdleAnimation()
 	{
 		Animation anim = GetComponent<Animation>();
+
 		anim.CrossFade(idleAnimation.name);
 		AnimationState state = anim[idleAnimation.name];
 		state.layer = -2;
@@ -251,10 +257,10 @@ public class CharacterBlacksmith : MonoBehaviour
 		GetComponent<Animation>().CrossFade(swordArmAnimation.name);
 	}
 
-
 	GameObject SpawnTool(GameObject prefab, Transform parentTransform)
 	{
 		var tool = Instantiate(prefab) as GameObject;
+
 		tool.transform.parent = parentTransform;
 		tool.transform.localPosition = new Vector3();
 		tool.transform.localRotation = new Quaternion();

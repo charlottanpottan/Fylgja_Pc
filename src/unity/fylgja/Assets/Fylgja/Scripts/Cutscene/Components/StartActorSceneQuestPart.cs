@@ -9,13 +9,14 @@ public class StartActorSceneQuestPart : ActorSceneComponent
 	protected override void Act()
 	{
 		var avatar = actingInScene.GetMainAvatar();
+
 		if (avatar)
 		{
 			avatar.OnCutsceneStart();
 		}
-		
+
 		DebugUtilities.Assert(scene != null, "Actor scene is null in start actor scene:" + name);
-		
+
 		instantiatedCutscene = ActorSceneUtility.CreateSceneWithAvatar(scene, avatar);
 		DebugUtilities.Assert(instantiatedCutscene != null, "No valid cutscene specified:" + scene.name);
 		instantiatedCutscene.endFunction = OnCutscenePlayed;
@@ -35,6 +36,7 @@ public class StartActorSceneQuestPart : ActorSceneComponent
 	void OnCutscenePlayed()
 	{
 		var avatar = actingInScene.GetMainAvatar();
+
 		if (avatar)
 		{
 			avatar.OnCutsceneEnd();

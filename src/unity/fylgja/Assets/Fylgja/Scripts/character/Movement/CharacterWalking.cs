@@ -6,7 +6,7 @@ public class CharacterWalking : Vehicle
 
 	public float maxWalkSpeed = 3.0f;
 	public float turnFactor = 10.0f;
-	
+
 	public CharacterStepDetector[] stepDetectors;
 
 	private CharacterController characterController;
@@ -39,7 +39,7 @@ public class CharacterWalking : Vehicle
 			return true;
 		}
 	}
-	
+
 	void SmoothRotation()
 	{
 		float y = transform.eulerAngles.y;
@@ -49,27 +49,29 @@ public class CharacterWalking : Vehicle
 		const float minimumFramesToReachRotation = 2.0f;
 		float maxSpeed = absDeltaY / Time.deltaTime / minimumFramesToReachRotation;
 		float rampedSpeed = 5.0f + absDeltaY * absDeltaY;
-		
+
 		float speed = Mathf.Sign(deltaY) * Mathf.Clamp(rampedSpeed, 0, maxSpeed);
+
 //		Debug.Log("SmoothRotation delta:" + deltaY + " target:" + requestedRotation.eulerAngles.y + " source:" + transform.eulerAngles.y + " speed:" + speed * Time.deltaTime);
 		y += speed * Time.deltaTime;
-			
+
 		transform.eulerAngles = new Vector3(0, y, 0);
 	}
-	
+
 	void Update()
 	{
 		if (characterController == null || !allowedToMove)
 		{
 			return;
 		}
-		
+
 		Vector3 moveDirection = requestedRotation * Vector3.forward;
 		Vector3 velocityVector;
+
 		if (characterController.isGrounded)
 		{
 			SmoothRotation();
-			
+
 			if (allowedToMove)
 			{
 				float deltaSpeed = (requestedSpeed - currentSpeed) * Time.deltaTime * 4.0f;
@@ -84,7 +86,7 @@ public class CharacterWalking : Vehicle
 		{
 			currentSpeed = 0;
 		}
-		
+
 		velocityVector = moveDirection * (currentSpeed * maxWalkSpeed);
 
 		const float gravity = 8.92f;
@@ -96,6 +98,7 @@ public class CharacterWalking : Vehicle
 	public override void Move(Quaternion desiredOrientation, float desiredSpeed)
 	{
 		Vector3 direction = desiredOrientation * Vector3.forward;
+
 		direction.y = 0;
 		direction = direction.normalized;
 
@@ -114,9 +117,10 @@ public class CharacterWalking : Vehicle
 	{
 		//Debug.Log("Walking: SetAllowedToMove:" + allowed + " on " + name);
 		allowedToMove = allowed;
+
 		if (!allowedToMove)
 		{
-			foreach(var detector in stepDetectors)
+			foreach (var detector in stepDetectors)
 			{
 				detector.IsEnabled(false);
 			}
@@ -124,7 +128,7 @@ public class CharacterWalking : Vehicle
 		}
 		else
 		{
-			foreach(var detector in stepDetectors)
+			foreach (var detector in stepDetectors)
 			{
 				detector.IsEnabled(true);
 			}

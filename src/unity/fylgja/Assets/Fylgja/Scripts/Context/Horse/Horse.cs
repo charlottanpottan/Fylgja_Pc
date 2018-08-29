@@ -7,7 +7,7 @@ public class Horse : Vehicle
 	public float acceleration = 1.0f;
 	public float backwardSpeed = 0.3f;
 	public CharacterController characterController;
-	
+
 	public AudioSource walkAudio;
 	public float walkMultiply = 1;
 	public float walkFadeSpeed = 1;
@@ -34,7 +34,6 @@ public class Horse : Vehicle
 		}
 	}
 
-
 	public void Update()
 	{
 		Vector3 moveDirection = new Vector3(0, 0, 1);
@@ -47,6 +46,7 @@ public class Horse : Vehicle
 				moveDirection = transform.rotation * Vector3.forward;
 				float deltaSpeed = (requestedSpeed - currentSpeed) * Time.deltaTime * acceleration;
 				currentSpeed += deltaSpeed;
+
 				if (Mathf.Abs(currentSpeed) > 0.05f)
 				{
 					transform.rotation = Quaternion.Slerp(transform.rotation, requestedRotation, turnFactor * Time.deltaTime);
@@ -66,13 +66,14 @@ public class Horse : Vehicle
 		velocityVector.y -= gravity;
 
 		characterController.Move(velocityVector * Time.deltaTime);
-		
+
 		float actualVelocity = new Vector3(characterController.velocity.x, 0, characterController.velocity.z).magnitude;
-		
+
 		actualVelocity = actualVelocity / maxWalkSpeed;
-		
+
 		walkAudio.volume = Mathf.Lerp(walkAudio.volume,actualVelocity * walkMultiply, walkFadeSpeed * Time.deltaTime);
-		if(actualVelocity >= walkToRunThreshold)
+
+		if (actualVelocity >= walkToRunThreshold)
 		{
 			runAudio.volume = (actualVelocity - walkToRunThreshold) * runMultiply;
 		}
@@ -81,7 +82,7 @@ public class Horse : Vehicle
 			runAudio.volume = 0;
 		}
 	}
-	
+
 	public override void OnAvatarEnter(IAvatar avatar)
 	{
 		Debug.Log("Horse: Avatar Enter");

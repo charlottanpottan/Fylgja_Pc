@@ -8,7 +8,6 @@ public class PlayerStorageDataStartedQuest
 	public string questPart;
 }
 
-
 public class PlayerStorageData
 {
 	public CheckpointId startingCheckpointId;

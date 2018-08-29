@@ -10,7 +10,7 @@ public class NewGameAction : ActionArbitration
 
 	public override void ExecuteAction(IAvatar avatar)
 	{
-		if(clickAudio != null)
+		if (clickAudio != null)
 		{
 			DontDestroyOnLoad(audioHandler.CreateAndPlay(clickAudio, audioVolume));
 		}

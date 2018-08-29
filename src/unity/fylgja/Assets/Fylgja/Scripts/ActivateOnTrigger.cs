@@ -25,6 +25,7 @@ public class ActivateOnTrigger : MonoBehaviour
 			{
 				o.SetActiveRecursively(false);
 			}
+
 			if (tagToActivate.Length >= 1)
 			{
 				foreach (var o in objectsToActivate)
@@ -39,6 +40,7 @@ public class ActivateOnTrigger : MonoBehaviour
 			{
 				o.SetActiveRecursively(true);
 			}
+
 			if (tagToActivate.Length >= 1)
 			{
 				foreach (var o in objectsToActivate)
