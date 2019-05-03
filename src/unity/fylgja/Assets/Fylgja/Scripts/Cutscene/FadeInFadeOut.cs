@@ -24,7 +24,6 @@ public class FadeInFadeOut : MonoBehaviour
 
 	void Awake()
 	{
-		iTween.CameraFadeAdd();
 	}
 
 	void Start()
@@ -48,7 +47,7 @@ public class FadeInFadeOut : MonoBehaviour
 		ht.Add("oncomplete", "OnFadeComplete");
 		ht.Add("oncompletetarget", gameObject);
 		fadeDirection = FadeInFadeOut.FadeDirection.FadeIn;
-		iTween.CameraFadeTo(ht);
+		iTween.FadeTo(GetComponent<Camera>().gameObject, ht);
 	}
 
 	public void FadeOut(float fadeTime)
@@ -63,7 +62,7 @@ public class FadeInFadeOut : MonoBehaviour
 		ht.Add("oncompletetarget", gameObject);
 
 		fadeDirection = FadeInFadeOut.FadeDirection.FadeOut;
-		iTween.CameraFadeTo(ht);
+		iTween.FadeTo(GetComponent<Camera>().gameObject, ht);
 	}
 
 	public void SetTargetVolume(float targetVolume)

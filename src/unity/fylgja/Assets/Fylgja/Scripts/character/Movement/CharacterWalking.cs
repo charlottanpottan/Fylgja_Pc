@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CharacterWalking : Vehicle
 {
-	public LegAnimator legAnimator;
+	//public LegAnimator legAnimator;
 
 	public float maxWalkSpeed = 3.0f;
 	public float turnFactor = 10.0f;
